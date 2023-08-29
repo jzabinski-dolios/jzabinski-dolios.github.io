@@ -166,5 +166,8 @@ module.exports = {
       "always",
       { exceptions: ["\n"], markers: ["*", "/"] },
     ],
+    "prettier/prettier": ["error",{
+      "endOfLine": "auto"}
+    ]
   },
 };
