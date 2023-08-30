@@ -1,22 +1,12 @@
 import { ReactElement } from 'react';
-import logo from './logo.svg';
+import { ReactComponent as UbiquitiIcon } from './ubi.svg';
 import './App.scss';
 
 function App(): ReactElement {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p id="motto">Ubiquiti FE Test Assignment</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UbiquitiIcon id="icon" />
+      <p id="motto">Ubiquiti FE Test Assignment</p>
     </div>
   );
 }

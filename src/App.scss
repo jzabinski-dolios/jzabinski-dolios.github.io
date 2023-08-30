@@ -1,41 +1,27 @@
 .App {
+  display: flex;
+  height: 100%;
+  padding: 1.625rem 11.25rem 9rem 11.3125rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
   text-align: center;
+  background: var(--primary-web-unifi-color-ublue-06, #006fff);
 
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
+  #icon {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 9.6875rem 9.6875rem 9.53663rem 9.6875rem;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-
-    @keyframes App-logo-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-
-  .App-link {
-    color: #61dafb;
+    align-items: center;
+    width: 19.375rem;
+    height: 19.52588rem;
+    flex-shrink: 0;
+    fill: var(--neutral-web-unifi-color-neutral-00, #fff);
   }
 
   #motto {
     color: var(--neutral-web-unifi-color-neutral-00, #fff);
+    margin: 0;
     text-align: center;
     font-size: 7.75rem;
     font-weight: 700;

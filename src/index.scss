@@ -1,4 +1,5 @@
 body {
+  height: 100vh;
   margin: 0;
   font-family: Lato;
   font-size: 0.875rem;
@@ -8,7 +9,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --primary-web-unifi-color-ublue-06: #006FFF;
   --neutral-web-unifi-color-neutral-00: #FFF;
+
+  #root {
+    height: 100vh;
+  }
 }
 
 code {
