@@ -1,0 +1,31 @@
+.Splash {
+    display: flex;
+    height: 100%;
+    padding: 1.625rem 11.25rem 9rem 11.3125rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+    background: var(--primary-web-unifi-color-ublue-06, #006fff);
+  
+    #icon {
+      display: flex;
+      padding: 9.6875rem 9.6875rem 9.53663rem 9.6875rem;
+      justify-content: center;
+      align-items: center;
+      width: 19.375rem;
+      height: 19.52588rem;
+      flex-shrink: 0;
+      fill: var(--neutral-web-unifi-color-neutral-00, #fff);
+    }
+  
+    #motto {
+      color: var(--neutral-web-unifi-color-neutral-00, #fff);
+      margin: 0;
+      text-align: center;
+      font-size: 7.75rem;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+  
