@@ -9,11 +9,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary-web-unifi-color-ublue-06: #006FFF;
-  --neutral-web-unifi-color-neutral-00: #FFF;
+  --primary-web-unifi-color-ublue-06: #006fff;
+  --neutral-web-unifi-color-neutral-00: #fff;
 
   #root {
     height: 100vh;
+  }
+
+  // The specs call for UI Sans_v7, which is not supplied. Aliasing UI Sans_v7 with Cabin, a public font available through fonts.google.com.
+  @font-face {
+    font-family: 'UI Sans_v7-Regular';
+    src: url('Cabin-Regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'UI Sans_v7-Bold';
+    src: url('Cabin-Bold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Lato';
+    src: url('Lato-Regular.woff2') format('woff2');
   }
 }
 

@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 The Figma assumes an aspect ratio of 1.9
+
+UI Sans_v7 not supplied; using Cabin instead.
+
+grid-active.svg not supplied; made my own grid-active.svg.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
