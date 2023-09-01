@@ -151,6 +151,7 @@ module.exports = {
     "no-empty": "warn",
     "no-extra-boolean-cast": "warn",
     "no-eval": "error",
+    "no-restricted-globals": "off",
     "no-shadow": "off", // required to be off for typescript
     "@typescript-eslint/no-shadow": "warn",
     "no-trailing-spaces": "warn",

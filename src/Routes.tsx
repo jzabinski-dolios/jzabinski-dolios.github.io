@@ -1,25 +1,23 @@
 import { ReactElement } from 'react';
-import { RouteObject, createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { Splash } from './pages/Splash';
+import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Devices } from './pages/Devices';
 import { Device } from './pages/Device';
+import App from './App';
 
 const rts: Array<RouteObject> = [
   {
     path: '/',
-    element: <Navigate replace to="splash" />
-  },
-  {
-    path: 'splash',
-    element: <Splash />
-  },
-  {
-    path: 'devices',
-    element: <Devices />
-  },
-  {
-    path: 'device',
-    element: <Device />
+    element: <App />,
+    children: [
+      {
+        path: 'devices',
+        element: <Devices />
+      },
+      {
+        path: 'device',
+        element: <Device />
+      }
+    ]
   }
 ];
 
