@@ -1,0 +1,19 @@
+.list-btn {
+  display: inline-flex;
+  cursor: pointer;
+  border-width: 0;
+  border-style: none;
+  border-radius: 0.25rem;
+  background: transparent;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.375rem;
+  align-items: flex-start;
+  &:hover {
+    background: var(--neutral-web-unifi-color-neutral-00, #fff);
+  }
+  // keyboard focus is indicated with :focus-visible, but this is not designed yet.
+  &:focus {
+    border: 1px solid var(--primary-web-unifi-color-ublue-06, #006fff);
+  }
+}
