@@ -1,13 +1,18 @@
 import { ReactElement, useRef } from 'react';
 import { ListIcon } from '../icons/ListIcon';
 import './ListBtn.scss';
+import { GridIcon } from '../icons/GridIcon';
 
-export const ListBtn = (): ReactElement => {
+interface ListBtnProps {
+  btn: 'table' | 'grid';
+}
+
+export const ListBtn = (props: ListBtnProps): ReactElement => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   return (
     <>
       <button className="list-btn" ref={buttonRef}>
-        <ListIcon />
+        {props.btn === 'table' ? <ListIcon /> : <GridIcon />}
       </button>
     </>
   );
