@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import './list.scss';
+import './ListIcon.scss';
 
 export interface ListIconProps {
   active: boolean;
