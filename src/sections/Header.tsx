@@ -5,8 +5,8 @@ import './Header.scss';
 export const Header = (): ReactElement => (
   <>
     <div className="header">
-      <div className="summary">
-        <div className="logo">
+      <div className="header-summary">
+        <div className="header-logo">
           <UbiIcon />
           <div className="header-text">Devices</div>
         </div>
