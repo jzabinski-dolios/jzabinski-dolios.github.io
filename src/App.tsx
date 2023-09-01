@@ -2,10 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Header } from './sections/Header';
 import { Splash } from './pages/Splash';
-
-enum LocalStorageVars {
-  SplashShown = 'splashShown'
-}
+import { LocalStorageVars } from './localStorage';
 
 function App(): ReactElement {
   // The splash screen is currently shown for one second when the page is entered for the first time.
