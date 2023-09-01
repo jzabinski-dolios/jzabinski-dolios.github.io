@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  // width explicitly defined in Figma, probably not intended.
+  // width: 90rem;
+  // padding not explicitly defined in header: defined lower down on the page though. This padding-right may or may not be needed.
+  padding-right: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--neutral-web-unifi-color-neutral-02, #f4f5f6);
+
+  .header-text {
+    color: var(--text-web-unifi-text-3, #808893);
+    align-self: center;
+  }
+
+  .header-summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .header-logo {
+      display: flex;
+      padding: 0.3125rem;
+      align-items: flex-start;
+      gap: 0.625rem;
+      background: var(--neutral-web-unifi-color-neutral-02, #f4f5f6);
+    }
+  }
+}
