@@ -1,12 +1,11 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Header } from './sections/Header';
 import { Splash } from './pages/Splash';
 import { LocalStorageVars } from './localStorage';
-import { Params } from './Routes';
 
 function App(): ReactElement {
-  const params = useParams<Params>();
+  const location = useLocation();
   // The splash screen is currently shown for one second when the page is entered for the first time.
   // Manage splash screen.
   const [showSplash, setShowSplash] = useState<boolean>(
@@ -19,12 +18,11 @@ function App(): ReactElement {
       const timer = setTimeout(() => {
         setShowSplash(false);
         localStorage.setItem(LocalStorageVars.SplashShown, 'true');
-        const path = params.method ?? 'list';
-        navigate(`/devices/${path}`);
+        navigate(location.pathname);
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [showSplash, navigate, params]);
+  }, [showSplash, navigate, location]);
   // If the page is either closed or refreshed, remove SplashShown so that we can display it again on first load.
   useEffect(
     () =>
