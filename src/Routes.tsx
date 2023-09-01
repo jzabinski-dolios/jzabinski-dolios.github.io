@@ -4,13 +4,22 @@ import { Devices } from './pages/Devices';
 import { Device } from './pages/Device';
 import App from './App';
 
+export interface Params {
+  [key: string]: string;
+  method: 'list' | 'grid';
+}
+
+export enum DevicesParams {
+  Method = 'method'
+}
+
 const rts: Array<RouteObject> = [
   {
     path: '/',
     element: <App />,
     children: [
       {
-        path: 'devices',
+        path: `devices/:${DevicesParams.Method}`,
         element: <Devices />
       },
       {

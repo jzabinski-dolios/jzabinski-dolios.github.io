@@ -5,8 +5,8 @@ import './Devices.scss';
 export const Devices = (): ReactElement => (
   <>
     <div className="devices">
-      <ListBtn btn="table" />
-      <ListBtn btn="grid" />
+      <ListBtn btn="table" navTo="../devices/list" />
+      <ListBtn btn="grid" navTo="../devices/grid" />
     </div>
   </>
 );
