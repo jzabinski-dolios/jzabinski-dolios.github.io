@@ -7,6 +7,8 @@ grid-active.svg not supplied; made my own grid-active.svg.
 
 All screens except Splash page have explicit width of 90rem. Assumed that that was not intended to be used in the app itself.
 
+Search Close icon initialized but not defined.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

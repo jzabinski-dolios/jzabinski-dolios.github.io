@@ -13,6 +13,9 @@ body {
   --neutral-web-unifi-color-neutral-00: #fff;
   --neutral-web-unifi-color-neutral-02: #f4f5f6;
   --text-web-unifi-text-3: #808893;
+  --neutral-2: #f6f6f8;
+  --text-black-45: rgba(0, 0, 0, 0.45);
+  --neutral-neutral-03-light: #EDEDF0;
 
   #root {
     height: 100vh;
@@ -32,6 +35,16 @@ body {
   @font-face {
     font-family: 'Lato';
     src: url('Lato-Regular.woff2') format('woff2');
+  }
+
+  .lato-regular-14 {
+    color: var(--text-black-45, rgba(0, 0, 0, 0.45));
+
+    font-family: Lato;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 171.429% */
   }
 }
 
