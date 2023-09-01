@@ -4,13 +4,13 @@ import { Devices } from './pages/Devices';
 import { Device } from './pages/Device';
 import App from './App';
 
-export interface Params {
-  [key: string]: string;
-  method: 'list' | 'grid';
+export enum DevicesParams {
+  method = 'method'
 }
 
-export enum DevicesParams {
-  Method = 'method'
+export interface Params {
+  [key: string]: string;
+  [DevicesParams.method]: 'list' | 'grid';
 }
 
 const rts: Array<RouteObject> = [
@@ -19,11 +19,11 @@ const rts: Array<RouteObject> = [
     element: <App />,
     children: [
       {
-        path: `devices/:${DevicesParams.Method}`,
+        path: `devices/:${DevicesParams.method}`,
         element: <Devices />
       },
       {
-        path: 'device',
+        path: 'device/:id',
         element: <Device />
       }
     ]
