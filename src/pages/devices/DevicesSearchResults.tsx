@@ -1,12 +1,18 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ReactElement } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesSearchResults.scss';
 
-type DeviceList = Array<{ abbrev: string; name: string }>;
+type DeviceList = Array<{ id: string; abbrev: string; name: string }>;
 
 export const DevicesSearchResults = (): ReactElement => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const clickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string): undefined => {
+    e.preventDefault();
+    navigate(`../device/${id}`);
+    return undefined;
+  };
   const getProducts = (): DeviceList => {
     const search = searchParams.get('search');
     if (search === null || search === '' || search.length < 2) {
@@ -15,9 +21,17 @@ export const DevicesSearchResults = (): ReactElement => {
     return deviceList.devices
       .filter(
         (device) =>
-          device.product?.name?.includes(search) || device.product?.abbrev?.includes(search)
+          device.id &&
+          (device.product?.name?.includes(search) || device.product?.abbrev?.includes(search))
       )
-      .map((device) => ({ abbrev: device.product!.abbrev!, name: device.product!.name! }));
+      .map((device) => {
+        const product = device.product!;
+        return {
+          id: device.id!,
+          abbrev: product.abbrev!,
+          name: product.name!
+        };
+      });
   };
   return (
     <>
@@ -26,7 +40,7 @@ export const DevicesSearchResults = (): ReactElement => {
           <div className="devices-search-results">
             {getProducts().map((device) => (
               <>
-                <div className="devices-search-result">
+                <div className="devices-search-result" onClick={(e) => clickHandler(e, device.id)}>
                   <div>{device.name}</div>
                   <div>{device.abbrev}</div>
                 </div>
