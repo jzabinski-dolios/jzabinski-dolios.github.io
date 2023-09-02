@@ -7,5 +7,16 @@
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
+    .devices-subheader-left {
+      display: flex;
+      height: 2rem;
+      align-items: center;
+      gap: 1rem;
+    }
+    .devices-subheader-right {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
   }
 }
