@@ -20,6 +20,9 @@
     justify-content: space-between;
     align-items: flex-start;
     color: var(--text-web-unifi-text-2, #50565E);
+    background-color: transparent;
+    box-sizing: content-box;
+    border: none;
 
     &:hover {
       background: var(--neutral-web-unifi-color-neutral-02, #F4F5F6);

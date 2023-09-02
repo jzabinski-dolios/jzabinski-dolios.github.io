@@ -8,7 +8,10 @@ type DeviceList = Array<{ id: string; abbrev: string; name: string; srch: string
 export const DevicesSearchResults = (): ReactElement => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const clickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string): undefined => {
+  const clickHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ): undefined => {
     e.preventDefault();
     navigate(`../device/${id}`);
     return undefined;
@@ -52,7 +55,7 @@ export const DevicesSearchResults = (): ReactElement => {
               const post = device.name.substring(endHlt + 1);
               return (
                 <>
-                  <div
+                  <button
                     className="devices-search-result"
                     onClick={(e) => clickHandler(e, device.id)}
                   >
@@ -62,7 +65,7 @@ export const DevicesSearchResults = (): ReactElement => {
                       <span>{post}</span>
                     </div>
                     <div>{device.abbrev}</div>
-                  </div>
+                  </button>
                 </>
               );
             })}
