@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactElement } from 'react';
-import { ListBtn } from '../btns/ListBtn';
+import { ListBtn } from '../../btns/ListBtn';
 import { ReactComponent as SearchIcon } from '../icons/search.svg';
 import './Devices.scss';
 import { useSearchParams } from 'react-router-dom';
