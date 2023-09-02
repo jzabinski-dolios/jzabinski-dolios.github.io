@@ -1,6 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../../icons/search.svg';
 import { ChangeEvent, ReactElement } from 'react';
+import { DevicesSearchResults } from './DevicesSearchResults';
+import './DevicesSearch.scss';
 
 export const DevicesSearch = (): ReactElement => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,13 +24,7 @@ export const DevicesSearch = (): ReactElement => {
             />
           </div>
         </div>
-        {searchParams.get('search') && searchParams.get('search') !== '' && (
-          <>
-            <div className="devices-search-results">
-              <div className="devices-search-result">{searchParams.get('search')}</div>
-            </div>
-          </>
-        )}
+        <DevicesSearchResults />
       </div>
     </>
   );

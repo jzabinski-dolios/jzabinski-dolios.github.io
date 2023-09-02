@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ReactElement } from 'react';
 import './DevicesSearchResults.scss';
 
-export const DevicesSearch = (): ReactElement => {
+export const DevicesSearchResults = (): ReactElement => {
   const [searchParams] = useSearchParams();
   return (
     <>
