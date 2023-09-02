@@ -28,5 +28,10 @@
     &:focus,&:active {
       border: 1px solid var(--primary-web-unifi-color-ublue-06, #006FFF);
     }
+
+    .hlt {
+      font-weight: 700;
+      text-decoration-line: underline;
+    }
   }
 }
