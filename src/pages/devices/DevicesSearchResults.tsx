@@ -14,15 +14,19 @@ export const DevicesSearchResults = (): ReactElement => {
     return undefined;
   };
   const getProducts = (): DeviceList => {
-    const search = searchParams.get('search');
-    if (search === null || search === '' || search.length < 2) {
+    const search = searchParams.get('search')?.toLocaleLowerCase();
+    if (search === null || search === undefined) {
+      return [];
+    }
+    if (search.length < 2) {
       return [];
     }
     return deviceList.devices
       .filter(
         (device) =>
           device.id &&
-          (device.product?.name?.includes(search) || device.product?.abbrev?.includes(search))
+          (device.product?.name?.toLocaleLowerCase()?.includes(search) ||
+            device.product?.abbrev?.toLocaleLowerCase()?.includes(search))
       )
       .map((device) => {
         const product = device.product!;
