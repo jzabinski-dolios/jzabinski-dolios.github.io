@@ -2,6 +2,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
+  contain: layout;
 
   .devices-search-layout {
     display: flex;

@@ -1,5 +1,7 @@
 .devices-search-results {
   display: flex;
+  position: fixed;
+  top: 2rem;
   width: 21.5rem;
   // padding moved to devices.search.result due to browser contraint
   flex-direction: column;
@@ -11,6 +13,20 @@
   box-shadow: 0px 16px 32px 0px rgba(28, 30, 45, 0.2);
 
   .devices-search-result {
-    padding: 0.5rem;
+    display: flex;
+    width: 20.5rem;
+    padding: 0.375rem 0.5rem;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: var(--text-web-unifi-text-2, #50565E);
+
+    &:hover {
+      background: var(--neutral-web-unifi-color-neutral-02, #F4F5F6);
+    }
+
+    &:focus,&:active {
+      border: 1px solid var(--primary-web-unifi-color-ublue-06, #006FFF);
+    }
   }
 }

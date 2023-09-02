@@ -3,13 +3,14 @@ interface Devices {
   devices: Array<Device>;
 }
 
-interface Device {
+export interface Device {
   [key: string]: any;
   id?: string;
   line?: { name?: string; id?: string };
   product?: {
     [key: string]: any;
     name?: string;
+    abbrev?: string;
   };
   shortnames?: Array<string>;
   icon?: {
@@ -18,7 +19,7 @@ interface Device {
   };
 }
 
-export const devices: Devices = {
+export const deviceList: Devices = {
   version: '56e24a4792ccd68dd0e0eb1d0c2cf5c719160a29',
   devices: [
     {
