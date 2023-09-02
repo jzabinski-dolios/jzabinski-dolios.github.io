@@ -64,5 +64,19 @@
         }
       }
     }
+
+    .devices-search-filter-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+
+      &.active {
+        color: var(--semantic-destructive-web-unifi-color-red-06, #F03A3E);
+      }
+
+      &.inactive {
+        color: var(--semantic-destructive-web-unifi-color-red-03, #F9B0B2);
+      }
+    }
   }
 }

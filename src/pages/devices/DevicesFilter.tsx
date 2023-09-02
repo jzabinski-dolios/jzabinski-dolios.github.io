@@ -11,8 +11,9 @@ export const DevicesFilter = (): ReactElement => {
     return uniqueLines;
   }, []);
   const [blurred, setBlurred] = useState(true);
+  const [activeResetBtn, setActiveResetBtn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const updateFilters = (line: string, e: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
+  const updateFilters = (line: string, e: React.ChangeEvent<HTMLInputElement>): void => {
     const action = (e.target as any).checked ? 'add' : 'remove';
     const rawFilters = searchParams.get('filters');
     let filters = rawFilters?.split(',') ?? [];
@@ -27,11 +28,27 @@ export const DevicesFilter = (): ReactElement => {
     }
     const newFilter = filters.join(',');
     if (newFilter.length > 0) {
+      if (activeResetBtn === false) {
+        setActiveResetBtn(true);
+      }
       searchParams.set('filters', newFilter);
     } else {
+      if (activeResetBtn === true) {
+        setActiveResetBtn(false);
+      }
       searchParams.delete('filters');
     }
     setSearchParams(searchParams);
+  };
+  const filterSet = (line: string): boolean => {
+    const rawFilters = searchParams.get('filters');
+    const filters = rawFilters?.split(',') ?? [];
+    return filters.includes(line);
+  };
+  const clearFilters = (): undefined => {
+    searchParams.delete('filters');
+    setSearchParams(searchParams);
+    return undefined;
   };
   return (
     <>
@@ -45,7 +62,9 @@ export const DevicesFilter = (): ReactElement => {
               setBlurred(true);
             }
           }}
-          onFocus={() => setBlurred(false)}
+          onFocus={() => {
+            setBlurred(false);
+          }}
         >
           Filter
           {!blurred && (
@@ -58,23 +77,26 @@ export const DevicesFilter = (): ReactElement => {
                   <>
                     <div className="device-search-filter-options-choices">
                       {lines.map((line) => (
-                        <>
-                          <div className="device-search-filter-options-choice">
-                            <input
-                              type="checkbox"
-                              value={line}
-                              name={line}
-                              onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) =>
-                                updateFilters(line, e)
-                              }
-                            />
-                            <label htmlFor={line}>{line}</label>
-                          </div>
-                        </>
+                        <div className="device-search-filter-options-choice" key={line}>
+                          <input
+                            type="checkbox"
+                            checked={filterSet(line)}
+                            value={line}
+                            name={line}
+                            onChange={(e) => updateFilters(line, e)}
+                          />
+                          <label htmlFor={line}>{line}</label>
+                        </div>
                       ))}
                     </div>
                   </>
                 )}
+                <div
+                  className={`devices-search-filter-btn ${activeResetBtn ? 'active' : 'inactive'}`}
+                  onClick={() => clearFilters()}
+                >
+                  Reset
+                </div>
               </div>
             </>
           )}
