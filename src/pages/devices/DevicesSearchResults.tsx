@@ -54,19 +54,18 @@ export const DevicesSearchResults = (): ReactElement => {
               const hlt = device.name.substring(beginHlt, endHlt + 1);
               const post = device.name.substring(endHlt + 1);
               return (
-                <>
-                  <button
-                    className="devices-search-result"
-                    onClick={(e) => clickHandler(e, device.id)}
-                  >
-                    <div>
-                      <span>{pre}</span>
-                      <span className="hlt">{hlt}</span>
-                      <span>{post}</span>
-                    </div>
-                    <div>{device.abbrev}</div>
-                  </button>
-                </>
+                <button
+                  key={device.id}
+                  className="devices-search-result"
+                  onClick={(e) => clickHandler(e, device.id)}
+                >
+                  <div>
+                    <span>{pre}</span>
+                    <span className="hlt">{hlt}</span>
+                    <span>{post}</span>
+                  </div>
+                  <div>{device.abbrev}</div>
+                </button>
               );
             })}
           </div>
