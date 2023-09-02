@@ -59,6 +59,9 @@
           border-radius: 0.25rem;
           border: 1px solid var(--neutral-6, #b6b9c4);
         }
+        label {
+          color: var(--text-text-2-light, rgba(0, 0, 0, 0.65));
+        }
       }
     }
   }

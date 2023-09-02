@@ -1,6 +1,7 @@
 import { ReactElement, useState } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesFilter.scss';
+import { useSearchParams } from 'react-router-dom';
 
 export const DevicesFilter = (): ReactElement => {
   const lines = deviceList.devices.reduce<Array<string>>((uniqueLines, currDevice) => {
@@ -10,6 +11,28 @@ export const DevicesFilter = (): ReactElement => {
     return uniqueLines;
   }, []);
   const [blurred, setBlurred] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const updateFilters = (line: string, e: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
+    const action = (e.target as any).checked ? 'add' : 'remove';
+    const rawFilters = searchParams.get('filters');
+    let filters = rawFilters?.split(',') ?? [];
+    if (action === 'add') {
+      if (!filters.includes(line)) {
+        filters.push(line);
+      }
+    } else {
+      if (filters.includes(line)) {
+        filters = filters.filter((filter) => filter !== line);
+      }
+    }
+    const newFilter = filters.join(',');
+    if (newFilter.length > 0) {
+      searchParams.set('filters', newFilter);
+    } else {
+      searchParams.delete('filters');
+    }
+    setSearchParams(searchParams);
+  };
   return (
     <>
       <div className="device-search-filter-ctr">
@@ -37,7 +60,14 @@ export const DevicesFilter = (): ReactElement => {
                       {lines.map((line) => (
                         <>
                           <div className="device-search-filter-options-choice">
-                            <input type="checkbox" value={line} name={line} />
+                            <input
+                              type="checkbox"
+                              value={line}
+                              name={line}
+                              onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) =>
+                                updateFilters(line, e)
+                              }
+                            />
                             <label htmlFor={line}>{line}</label>
                           </div>
                         </>
