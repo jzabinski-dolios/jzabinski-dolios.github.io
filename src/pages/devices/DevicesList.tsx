@@ -87,11 +87,15 @@ export const DevicesList = (): ReactElement => {
       <div className="devices-list-table-header-ctr">
         <div className="devices-list-table-header">
           <div className="devices-list-table-header-icon"></div>
-          <div className="devices-list-table-header-line">
-            <div className="heading-medium">Product Line</div>
+          <div className="devices-list-table-header-col">
+            <div className="devices-list-table-header-text-ctr">
+              <div className="heading-medium">Product Line</div>
+            </div>
           </div>
-          <div className="devices-list-table-header-name">
-            <div className="heading-medium">Name</div>
+          <div className="devices-list-table-header-col">
+            <div className="devices-list-table-header-text-ctr">
+              <div className="heading-medium">Name</div>
+            </div>
           </div>
         </div>
       </div>
