@@ -1,6 +1,7 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesList.scss';
+import { useSearchParams } from 'react-router-dom';
 
 interface ProductTblData {
   line: string;
@@ -52,6 +53,11 @@ export const DevicesList = (): ReactElement => {
     }
     return fullList;
   }, []);
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    searchParams.set('total', products.length.toLocaleString());
+    setSearchParams(searchParams);
+  });
   return (
     <>
       <div className="devices-list-table-header-ctr">
