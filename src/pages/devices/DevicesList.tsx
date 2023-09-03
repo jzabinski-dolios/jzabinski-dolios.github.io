@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesList.scss';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -68,6 +68,16 @@ export const DevicesList = (): ReactElement => {
     searchParams.set(DevicesSearchParams.total, products.length.toLocaleString());
     setSearchParams(searchParams);
   }, [searchParams, setSearchParams, products.length]);
+  // Height management
+  // Rather than deviate from the Figma, manage height dynamically here.
+  const [ctrHeight, setCtrHeight] = useState(1000);
+  const ctrRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const yOffset = ctrRef.current?.getBoundingClientRect()?.y ?? null;
+    if (yOffset) {
+      setCtrHeight(innerHeight - yOffset);
+    }
+  }, [ctrRef, setCtrHeight]);
   const onProductClick = (id: string): undefined => {
     navigate(`../device/${id}`);
     return undefined;
@@ -85,7 +95,7 @@ export const DevicesList = (): ReactElement => {
           </div>
         </div>
       </div>
-      <div className="devices-list-table-ctr">
+      <div className="devices-list-table-ctr" ref={ctrRef} style={{ height: ctrHeight }}>
         <div className="devices-list-table">
           <div className="devices-list-table-images">
             {products.map((product, index) => {
