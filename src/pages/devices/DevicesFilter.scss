@@ -1,5 +1,6 @@
 .device-search-filter-ctr {
   contain: layout;
+  z-index: 1;
 
   .devices-search-filter {
     display: inline-flex;
