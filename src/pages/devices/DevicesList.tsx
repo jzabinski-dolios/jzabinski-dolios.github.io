@@ -38,10 +38,16 @@ const findLeastResolution = (
 };
 
 export const DevicesList = (): ReactElement => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const DEFAULT_RES = 21.67;
+  const rawFilters = searchParams.get('filters');
+  const filters = rawFilters?.split(',') ?? [];
   const products = deviceList.devices.reduce<Array<ProductTblData>>((fullList, currDevice) => {
-    const id = currDevice.id;
     const line = currDevice.line?.name;
+    if (line && filters.includes(line)) {
+      return fullList;
+    }
+    const id = currDevice.id;
     const description = currDevice.product?.name;
     const iconID = currDevice.icon?.id;
     const resolution = currDevice.icon?.resolutions
@@ -58,7 +64,6 @@ export const DevicesList = (): ReactElement => {
     return fullList;
   }, []);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     searchParams.set(DevicesSearchParams.total, products.length.toLocaleString());
     setSearchParams(searchParams);
