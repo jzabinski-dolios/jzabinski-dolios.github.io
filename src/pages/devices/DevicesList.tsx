@@ -1,14 +1,15 @@
 import { ReactElement, useEffect } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesList.scss';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DevicesSearchParams } from '../../Routes';
 
 interface ProductTblData {
+  id: string;
   line: string;
   description: string;
   image: {
-    id: string;
+    iconID: string;
     resolution: [number, number] | null;
   };
 }
@@ -39,26 +40,33 @@ const findLeastResolution = (
 export const DevicesList = (): ReactElement => {
   const DEFAULT_RES = 21.67;
   const products = deviceList.devices.reduce<Array<ProductTblData>>((fullList, currDevice) => {
+    const id = currDevice.id;
     const line = currDevice.line?.name;
     const description = currDevice.product?.name;
-    const id = currDevice.icon?.id;
+    const iconID = currDevice.icon?.id;
     const resolution = currDevice.icon?.resolutions
       ? findLeastResolution(currDevice.icon.resolutions, DEFAULT_RES)
       : null;
-    if (line && description && id) {
+    if (line && description && id && iconID) {
       fullList.push({
+        id,
         line,
         description,
-        image: { id, resolution }
+        image: { iconID: iconID, resolution }
       });
     }
     return fullList;
   }, []);
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     searchParams.set(DevicesSearchParams.total, products.length.toLocaleString());
     setSearchParams(searchParams);
   }, [searchParams, setSearchParams, products.length]);
+  const onProductClick = (id: string): undefined => {
+    navigate(`../device/${id}`);
+    return undefined;
+  };
   return (
     <>
       <div className="devices-list-table-header-ctr">
@@ -77,7 +85,7 @@ export const DevicesList = (): ReactElement => {
           <div className="devices-list-table-images">
             {products.map((product, index) => {
               const key = `devices-list-table-images-ctr-${index}`;
-              const id = product.image.id;
+              const id = product.image.iconID;
               const [width, height] = product.image.resolution ?? [null, null];
               const imgURL =
                 width && height
@@ -85,7 +93,11 @@ export const DevicesList = (): ReactElement => {
                   : 'https://noimage';
               const encodedURI = encodeURI(imgURL);
               return (
-                <div className="devices-list-table-images-ctr" key={key}>
+                <div
+                  className="devices-list-table-images-ctr"
+                  key={key}
+                  onClick={() => onProductClick(product.id)}
+                >
                   <div className="devices-list-table-images-thumbnail">
                     <div className="devices-list-table-images-base">
                       <div
@@ -104,7 +116,11 @@ export const DevicesList = (): ReactElement => {
             {products.map((product, index) => {
               const key = `devices-list-table-product-line-${index}`;
               return (
-                <div className="devices-list-table-product-line" key={key}>
+                <div
+                  className="devices-list-table-product-line"
+                  key={key}
+                  onClick={() => onProductClick(product.id)}
+                >
                   <div className="devices-list-table-product-line-text">{product.line}</div>
                 </div>
               );
@@ -114,7 +130,11 @@ export const DevicesList = (): ReactElement => {
             {products.map((product, index) => {
               const key = `devices-list-table-product-name-${index}`;
               return (
-                <div className="devices-list-table-product-name" key={key}>
+                <div
+                  className="devices-list-table-product-name"
+                  key={key}
+                  onClick={() => onProductClick(product.id)}
+                >
                   <div className="devices-list-table-product-name-text">{product.description}</div>
                 </div>
               );

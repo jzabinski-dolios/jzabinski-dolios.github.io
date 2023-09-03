@@ -51,6 +51,7 @@
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
+        cursor: pointer;
         border-bottom: 1px solid var(--neutral-neutral-03-light, #ededf0);
         .devices-list-table-images-thumbnail {
           width: 1.25rem;
@@ -95,6 +96,7 @@
       align-items: center;
       gap: 0.5rem;
       align-self: stretch;
+      cursor: pointer;
       border-bottom: 1px solid var(--neutral-neutral-03-light, #ededf0);
       .devices-list-table-product-line-text {
         color: var(--text-text-2-light, rgba(0, 0, 0, 0.65));
