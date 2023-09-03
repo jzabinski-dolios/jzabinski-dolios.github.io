@@ -11,6 +11,8 @@ Search Close icon initialized but not defined, so not developed.
 
 Unclear if '123 Devices' is current count of table, or total devices. Went with current count of table.
 
+Images call for 'lightgray' background color, but that is not reflected in Figma. So, removed it.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

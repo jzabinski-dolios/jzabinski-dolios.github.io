@@ -1,5 +1,10 @@
 .devices {
   font-family: 'UI Sans_v7-Regular';
+  display: flex;
+  // width: 90rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
 
   .devices-subheader {
     display: flex;

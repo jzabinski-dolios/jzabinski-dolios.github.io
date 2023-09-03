@@ -16,6 +16,8 @@ body {
   --neutral-2: #f6f6f8;
   --neutral-6: #b6b9c4;
   --text-black-45: rgba(0, 0, 0, 0.45);
+  --text-text-1-light: rgba(0, 0, 0, 0.85);
+  --text-text-2-light: rgba(0, 0, 0, 0.65);
   --neutral-neutral-03-light: #ededf0;
   --text-web-unifi-text-2: #50565e;
   --Gray-4: #bdbdbd;
@@ -59,6 +61,17 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 1rem; /* 133.333% */
+  }
+
+  .heading-medium {
+    color: var(--text-text-1-light, rgba(0, 0, 0, 0.85));
+
+    /* Web/Heading-medium */
+    font-family: UI Sans_v7;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem; /* 142.857% */
   }
 }
 
