@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   contain: layout;
+  z-index: 1;
 
   .devices-search-layout {
     display: flex;
