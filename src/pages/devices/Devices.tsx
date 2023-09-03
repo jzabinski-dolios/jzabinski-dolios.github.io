@@ -7,6 +7,7 @@ import { DevicesFilter } from './DevicesFilter';
 import { useParams } from 'react-router';
 import { DevicesRouteParams } from '../../Routes';
 import { DevicesList } from './DevicesList';
+import { DevicesGrid } from './DevicesGrid';
 
 export const Devices = (): ReactElement => {
   const params = useParams<DevicesRouteParams>();
@@ -25,11 +26,7 @@ export const Devices = (): ReactElement => {
           </div>
         </div>
         {params.method === 'list' && <DevicesList />}
-        {params.method === 'grid' && (
-          <>
-            <div className="devices-grid">Grid goes here</div>
-          </>
-        )}
+        {params.method === 'grid' && <DevicesGrid />}
       </div>
     </>
   );
