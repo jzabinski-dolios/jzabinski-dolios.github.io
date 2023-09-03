@@ -98,7 +98,7 @@ export const DevicesList = (): ReactElement => {
       <div className="devices-list-table-ctr" ref={ctrRef} style={{ height: ctrHeight }}>
         <div className="devices-list-table">
           <div className="devices-list-table-images">
-            {products.map((product, index) => {
+            {products.map((product, index: number) => {
               const key = `devices-list-table-images-ctr-${index}`;
               const id = product.image.iconID;
               const [width, height] = product.image.resolution ?? [null, null];
