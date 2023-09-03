@@ -15,6 +15,7 @@
   scrollbar-width: none;
   .devices-grid-item {
     display: flex;
+    cursor: pointer;
     padding-bottom: 0px;
     flex-direction: column;
     align-items: flex-start;
@@ -22,6 +23,17 @@
     flex: 1 0 0;
     border-radius: 0.5rem;
     border: 1px solid var(--neutral-neutral-03-light, #ededf0);
+
+    &:hover {
+      border-radius: 0.5rem;
+      border: 1px solid var(--neutral-neutral-03-light, #ededf0);
+      background: var(--neutral-web-unifi-color-neutral-01, #f9fafa);
+    }
+    &:focus,
+    &:active {
+      border-radius: 0.5rem;
+      border: 1px solid var(--primary-web-unifi-color-ublue-06, #006fff);
+    }
     .devices-grid-item-upper {
       display: flex;
       contain: layout;
@@ -65,13 +77,13 @@
         height: 2.5rem;
         align-self: stretch;
         color: var(--text-text-1-light, rgba(0, 0, 0, 0.85));
-        .devices-grid-item-lower-prod-shortnames {
-          display: flex;
-          align-items: flex-start;
-          align-self: stretch;
-          .devices-grid-item-lower-prod-shortname {
-            color: var(--text-text-3, rgba(0, 0, 0, 0.45));
-          }
+      }
+      .devices-grid-item-lower-prod-shortnames {
+        display: flex;
+        align-items: flex-start;
+        align-self: stretch;
+        .devices-grid-item-lower-prod-shortname {
+          color: var(--text-text-3, rgba(0, 0, 0, 0.45));
         }
       }
     }

@@ -111,13 +111,23 @@ export const DevicesGrid = (): ReactElement => {
               <div className="devices-grid-item-lower">
                 <div className="devices-grid-item-lower-prod-desc">{product.description}</div>
                 <div className="devices-grid-item-lower-prod-shortnames">
-                  {product.shortnames.map((shortname, shNIndex: number) => {
+                  {product.shortnames.map((shortname, shNIndex: number, allNames) => {
                     const snKey = `devices-grid-item-lower-prod-shortname-${shNIndex}`;
                     return (
                       <>
-                        <div className="devices-grid-item-lower-prod-shortname caption" key={snKey}>
+                        <span
+                          className="devices-grid-item-lower-prod-shortname caption"
+                          key={snKey}
+                        >
                           {shortname}
-                        </div>
+                        </span>
+                        {shNIndex !== allNames.length - 1 && (
+                          <>
+                            <span className="devices-grid-item-lower-prod-shortname caption">
+                              ,&nbsp;
+                            </span>
+                          </>
+                        )}
                       </>
                     );
                   })}
