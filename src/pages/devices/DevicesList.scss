@@ -39,6 +39,13 @@
   flex-direction: column;
   align-items: flex-start;
   overflow-y: auto;
+  // Remove scrollbar
+  // Chrome and Safari use nonstandard ::-webkit-scroller
+  // A standard scrollbar-width is coming, but only fully supported by Firefox right now.
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
   .devices-list-table {
     display: flex;
     align-items: flex-start;
