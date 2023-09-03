@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Devices } from './pages/Devices';
+import { Devices } from './pages/devices/Devices';
 import { Device } from './pages/Device';
 import App from './App';
 

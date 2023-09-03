@@ -7,6 +7,10 @@ grid-active.svg not supplied; made my own grid-active.svg.
 
 All screens except Splash page have explicit width of 90rem. Assumed that that was not intended to be used in the app itself.
 
+Search Close icon initialized but not defined, so not developed.
+
+Unclear if '123 Devices' is current count of table, or total devices. Went with current count of table.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

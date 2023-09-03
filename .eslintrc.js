@@ -168,11 +168,5 @@ module.exports = {
     radix: 'off',
     'semi-style': 'warn',
     'spaced-comment': ['warn', 'always', { exceptions: ['\n'], markers: ['*', '/'] }],
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto'
-      }
-    ]
   }
 };
