@@ -8,6 +8,10 @@ export enum DevicesRouteParams {
   method = 'method'
 }
 
+export enum DevicesSearchParams {
+  total = 'total'
+}
+
 export enum DeviceRouteParams {
   id = 'id'
 }
