@@ -40,7 +40,7 @@ const findLeastResolution = (
 
 export const DevicesGrid = (): ReactElement => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const DEFAULT_RES = 21.67;
+  const DEFAULT_RES = 84;
   const rawFilters = searchParams.get('filters');
   const filters = rawFilters?.split(',') ?? [];
   const products = deviceList.devices.reduce<Array<ProductTblData>>((fullList, currDevice) => {
@@ -103,7 +103,7 @@ export const DevicesGrid = (): ReactElement => {
                 <div
                   className="devices-grid-item-upper-image"
                   style={{
-                    background: `url(${encodedURI}), lightgray 50% / cover no-repeat`
+                    backgroundImage: `url(${encodedURI})`
                   }}
                 ></div>
                 <div className="devices-grid-item-upper-prod-line">{product.line}</div>
