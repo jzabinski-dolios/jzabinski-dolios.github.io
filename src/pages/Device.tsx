@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { Location, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DeviceRouteParams } from '../Routes';
 import { BackIcon } from '../icons/BackIcon';
@@ -38,6 +38,7 @@ export const DeviceInfo = (): ReactElement | null => {
   const params = useParams<DeviceRouteParams>();
   const location = useLocation();
   const navigate = useNavigate();
+  const [displayJSON, setDisplayJSON] = useState(false);
   const id = params.id;
   if (!id) {
     return null;
@@ -80,6 +81,7 @@ export const DeviceInfo = (): ReactElement | null => {
     const nextNav =
       nextPrev === 'next' ? deviceList.devices[next].id! : deviceList.devices[prev].id!;
     const lastDevicesLocation = (location.state?.from as Location | undefined) ?? null;
+    setDisplayJSON(false);
     if (lastDevicesLocation) {
       navigate(`../device/${nextNav}`, { state: { from: lastDevicesLocation } });
     } else {
@@ -94,6 +96,11 @@ export const DeviceInfo = (): ReactElement | null => {
     }
     return undefined;
   };
+  const onRetrieveClick = (): undefined => {
+    setDisplayJSON(true);
+    return undefined;
+  };
+  const retrieveJSON = (): string => JSON.stringify(device, undefined, 2);
   return (
     <>
       <div className="device">
@@ -177,6 +184,10 @@ export const DeviceInfo = (): ReactElement | null => {
             </div>
           </div>
         </div>
+        <button className="device-cta-ctr" onClick={() => onRetrieveClick()}>
+          <div className="device-cta-text">See All Details as JSON</div>
+        </button>
+        {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
       </div>
     </>
   );
