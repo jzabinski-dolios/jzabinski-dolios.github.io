@@ -69,6 +69,12 @@ export const DeviceInfo = (): ReactElement | null => {
     speed: getSpeed(device),
     ports: getPorts(device)
   };
+  const [width, height] = details.image.resolution ?? [null, null];
+  const imgURL =
+    width && height && details.image.iconID
+      ? `https://static.ui.com/fingerprint/ui/icons/${details.image.iconID}_${width}x${height}.png`
+      : '';
+  const encodedURI = encodeURI(imgURL);
 
   const onNextPrevClick = (nextPrev: 'next' | 'prev' = 'next'): undefined => {
     const nextNav =
@@ -88,12 +94,6 @@ export const DeviceInfo = (): ReactElement | null => {
     }
     return undefined;
   };
-  const [width, height] = details.image.resolution ?? [null, null];
-  const imgURL =
-    width && height && details.image.iconID
-      ? `https://static.ui.com/fingerprint/ui/icons/${details.image.iconID}_${width}x${height}.png`
-      : '';
-  const encodedURI = encodeURI(imgURL);
   return (
     <>
       <div className="device">
