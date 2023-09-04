@@ -37,6 +37,9 @@
       }
     }
     .device-subheader-btn-ctr {
+      border: none;
+      background: transparent;
+      cursor: pointer;
       display: flex;
       align-items: center;
       .device-subheader-btn {

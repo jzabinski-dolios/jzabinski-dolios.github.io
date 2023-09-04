@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { DeviceRouteParams } from '../Routes';
 import { BackIcon } from '../icons/BackIcon';
 import { ForwardIcon } from '../icons/ForwardIcon';
@@ -31,6 +31,8 @@ const getPorts = (device: Device): string | null =>
 
 export const DeviceInfo = (): ReactElement | null => {
   const params = useParams<DeviceRouteParams>();
+  // const [searchParams, setSearchParams] = useSearchParams({ last: 'list' });
+  const navigate = useNavigate();
   const id = params.id;
   if (!id) {
     return null;
@@ -54,22 +56,29 @@ export const DeviceInfo = (): ReactElement | null => {
     speed: getSpeed(device),
     ports: getPorts(device)
   };
+
+  const onNextPrevClick = (nextPrev: 'next' | 'prev' = 'next'): undefined => {
+    const nextNav =
+      nextPrev === 'next' ? deviceList.devices[next].id! : deviceList.devices[prev].id!;
+    navigate(`../device/${nextNav}`);
+    return undefined;
+  };
   return (
     <>
       <div className="device">
         <div className="device-subheader-ctr">
           <div className="device-subheader">
             <div className="device-subheader-left">
-              <div className="device-subheader-btn-ctr">
+              <button className="device-subheader-btn-ctr">
                 <div className="device-subheader-btn">{<BackIcon />}</div>
-              </div>
-              <div className="device-subheader-back-btn-text">Back</div>
+                <div className="device-subheader-back-btn-text">Back</div>
+              </button>
             </div>
             <div className="device-subheader-right">
-              <div className="device-subheader-btn-ctr">
+              <div className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('prev')}>
                 <div className="device-subheader-btn">{<BackIcon />}</div>
               </div>
-              <div className="device-subheader-btn-ctr">
+              <div className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('next')}>
                 <div className="device-subheader-btn">{<ForwardIcon />}</div>
               </div>
             </div>
