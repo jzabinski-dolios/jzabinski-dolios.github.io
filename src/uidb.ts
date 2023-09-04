@@ -17,6 +17,20 @@ export interface Device {
     id?: string;
     resolutions?: Array<[number, number]>;
   };
+  unifi?: {
+    [key: string]: any;
+    network?: {
+      [key: string]: any;
+      ethernetMaxSpeedMegabitsPerSecond?: number;
+      radios?: {
+        [key: string]: {
+          [key: string]: any;
+          maxPower?: number;
+        };
+      };
+    };
+    numberOfPorts?: number;
+  };
 }
 
 export const deviceList: Devices = {

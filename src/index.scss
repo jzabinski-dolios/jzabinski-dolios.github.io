@@ -19,7 +19,10 @@ body {
   --text-black-45: rgba(0, 0, 0, 0.45);
   --text-text-1-light: rgba(0, 0, 0, 0.85);
   --text-text-2-light: rgba(0, 0, 0, 0.65);
+  --text-text-3: rgba(0, 0, 0, 0.45);
+  --text-text-3-light: rgba(0, 0, 0, 0.45);
   --neutral-neutral-03-light: #ededf0;
+  --neutral-neutral-08-light: #838691;
   --text-web-unifi-text-2: #50565e;
   --Gray-4: #bdbdbd;
 
@@ -73,6 +76,16 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: 1.25rem; /* 142.857% */
+  }
+
+  .heading-xlarge-1 {
+    color: var(--text-text-1-light, rgba(0, 0, 0, 0.85));
+    /* Web/Heading-xlarge-1 */
+    font-family: UI Sans_v7;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.75rem; /* 140% */
   }
 }
 

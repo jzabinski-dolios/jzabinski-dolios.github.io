@@ -1,9 +1,10 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesList.scss';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { DevicesSearchParams } from '../../Routes';
-import { ProductTblData, findLeastResolution } from './devicesUtilities';
+import { ProductTblData } from './devicesUtilities';
+import { findLeastResolution } from '../findDeviceResolution';
 
 export const DevicesList = (): ReactElement => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,6 +32,7 @@ export const DevicesList = (): ReactElement => {
     }
     return fullList;
   }, []);
+  const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     searchParams.set(DevicesSearchParams.total, products.length.toLocaleString());
@@ -47,7 +49,7 @@ export const DevicesList = (): ReactElement => {
     }
   }, [ctrRef, setCtrHeight]);
   const onProductClick = (id: string): undefined => {
-    navigate(`../device/${id}`);
+    navigate(`../device/${id}`, { state: { from: location } });
     return undefined;
   };
   return (

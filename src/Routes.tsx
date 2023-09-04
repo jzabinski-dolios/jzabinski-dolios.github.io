@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Devices } from './pages/devices/Devices';
-import { Device } from './pages/Device';
+import { DeviceInfo } from './pages/Device';
 import App from './App';
 
 export enum DevicesRouteParams {
@@ -37,7 +37,7 @@ const rts: Array<RouteObject> = [
       },
       {
         path: `device/:${DeviceRouteParams.id}`,
-        element: <Device />
+        element: <DeviceInfo />
       }
     ]
   }
