@@ -3,7 +3,8 @@ import { deviceList } from '../../uidb';
 import './DevicesList.scss';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { DevicesSearchParams } from '../../Routes';
-import { ProductTblData, findLeastResolution } from './devicesUtilities';
+import { ProductTblData } from './devicesUtilities';
+import { findLeastResolution } from '../findDeviceResolution';
 
 export const DevicesList = (): ReactElement => {
   const [searchParams, setSearchParams] = useSearchParams();
