@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { DeviceRouteParams } from '../Routes';
 import { BackIcon } from '../icons/BackIcon';
 import { ForwardIcon } from '../icons/ForwardIcon';
+import { Device, deviceList } from '../uidb';
 import './Device.scss';
 
 interface ProductDetails {
@@ -10,21 +11,48 @@ interface ProductDetails {
   id: string;
   description: string;
   shortNames: Array<string>;
-  maxPower?: string;
-  speed?: string;
-  ports?: string;
+  maxPower: string | null;
+  speed: string | null;
+  ports: string | null;
 }
 
-export const Device = (): ReactElement => {
+const getMaxPower = (device: Device): string | null => {
+  const radios = device.unifi?.network?.radios;
+  // Lots of max powers are available, depending on the radio. Display the first one?
+  const [, firstRadVal] = radios ? Object.entries(radios)[0] : [null, null];
+  return firstRadVal?.maxPower?.toString() ?? null;
+};
+
+const getSpeed = (device: Device): string | null =>
+  device.unifi?.network?.ethernetMaxSpeedMegabitsPerSecond?.toString() ?? null;
+
+const getPorts = (device: Device): string | null =>
+  device.unifi?.network?.numberOfPorts?.toString() ?? null;
+
+export const DeviceInfo = (): ReactElement | null => {
   const params = useParams<DeviceRouteParams>();
+  const id = params.id;
+  if (!id) {
+    return null;
+  }
+  const dvcIndex = deviceList.devices.findIndex((device) => device.id === id);
+  if (dvcIndex === -1) {
+    return null;
+  }
+  const lastIndex = deviceList.devices.length - 1;
+  const ahead = dvcIndex + 1;
+  const behind = dvcIndex - 1;
+  const next = ahead <= lastIndex ? ahead : 0;
+  const prev = behind >= 0 ? behind : lastIndex;
+  const device = deviceList.devices[dvcIndex];
   const details: ProductDetails = {
-    prodLine: 'Product Line goes here',
-    id: 'id goes here',
-    description: 'description',
-    shortNames: ['Short name'],
-    maxPower: 'Max power',
-    speed: 'speed',
-    ports: '1'
+    prodLine: device.line?.name ?? '',
+    id: device.id!,
+    description: device.product?.name ?? '',
+    shortNames: device.shortnames ?? [''],
+    maxPower: getMaxPower(device),
+    speed: getSpeed(device),
+    ports: getPorts(device)
   };
   return (
     <>
