@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { deviceList } from '../../uidb';
 import './DevicesGrid.scss';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { DevicesSearchParams } from '../../Routes';
 import { ProductTblData, findLeastResolution } from './devicesUtilities';
 
@@ -37,6 +37,7 @@ export const DevicesGrid = (): ReactElement => {
     }
     return fullList;
   }, []);
+  const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     searchParams.set(DevicesSearchParams.total, products.length.toLocaleString());
@@ -53,7 +54,7 @@ export const DevicesGrid = (): ReactElement => {
     }
   }, [ctrRef, setCtrHeight]);
   const onProductClick = (id: string): undefined => {
-    navigate(`../device/${id}`);
+    navigate(`../device/${id}`, { state: { from: location } });
     return undefined;
   };
   return (

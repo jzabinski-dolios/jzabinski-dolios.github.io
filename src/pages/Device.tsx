@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Location, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DeviceRouteParams } from '../Routes';
 import { BackIcon } from '../icons/BackIcon';
 import { ForwardIcon } from '../icons/ForwardIcon';
@@ -31,7 +31,7 @@ const getPorts = (device: Device): string | null =>
 
 export const DeviceInfo = (): ReactElement | null => {
   const params = useParams<DeviceRouteParams>();
-  // const [searchParams, setSearchParams] = useSearchParams({ last: 'list' });
+  const location = useLocation();
   const navigate = useNavigate();
   const id = params.id;
   if (!id) {
@@ -60,7 +60,19 @@ export const DeviceInfo = (): ReactElement | null => {
   const onNextPrevClick = (nextPrev: 'next' | 'prev' = 'next'): undefined => {
     const nextNav =
       nextPrev === 'next' ? deviceList.devices[next].id! : deviceList.devices[prev].id!;
-    navigate(`../device/${nextNav}`);
+    const lastDevicesLocation = (location.state?.from as Location | undefined) ?? null;
+    if (lastDevicesLocation) {
+      navigate(`../device/${nextNav}`, { state: { from: lastDevicesLocation } });
+    } else {
+      navigate(`../device/${nextNav}`);
+    }
+    return undefined;
+  };
+  const onBackClick = (): undefined => {
+    const lastDevicesLocation = (location.state?.from as Location | undefined) ?? null;
+    if (lastDevicesLocation) {
+      navigate(`../${lastDevicesLocation.pathname}`);
+    }
     return undefined;
   };
   return (
@@ -69,7 +81,7 @@ export const DeviceInfo = (): ReactElement | null => {
         <div className="device-subheader-ctr">
           <div className="device-subheader">
             <div className="device-subheader-left">
-              <button className="device-subheader-btn-ctr">
+              <button className="device-subheader-btn-ctr" onClick={() => onBackClick()}>
                 <div className="device-subheader-btn">{<BackIcon />}</div>
                 <div className="device-subheader-back-btn-text">Back</div>
               </button>
