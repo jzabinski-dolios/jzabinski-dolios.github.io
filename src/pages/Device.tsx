@@ -10,9 +10,9 @@ interface ProductDetails {
   id: string;
   description: string;
   shortNames: Array<string>;
-  maxPower: string;
-  speed: string;
-  ports: string;
+  maxPower?: string;
+  speed?: string;
+  ports?: string;
 }
 
 export const Device = (): ReactElement => {
@@ -77,18 +77,30 @@ export const Device = (): ReactElement => {
                   {details.shortNames.join(', ')}
                 </div>
               </div>
-              <div className="device-content-details-item">
-                <div className="device-content-details-item-lbl">Max. Power</div>
-                <div className="device-content-details-item-val">{details.maxPower}</div>
-              </div>
-              <div className="device-content-details-item">
-                <div className="device-content-details-item-lbl">Speed</div>
-                <div className="device-content-details-item-val">{details.speed}</div>
-              </div>
-              <div className="device-content-details-item">
-                <div className="device-content-details-item-lbl">Number of Ports</div>
-                <div className="device-content-details-item-val">{details.ports}</div>
-              </div>
+              {details.maxPower && (
+                <>
+                  <div className="device-content-details-item">
+                    <div className="device-content-details-item-lbl">Max. Power</div>
+                    <div className="device-content-details-item-val">{details.maxPower}</div>
+                  </div>
+                </>
+              )}
+              {details.speed && (
+                <>
+                  <div className="device-content-details-item">
+                    <div className="device-content-details-item-lbl">Speed</div>
+                    <div className="device-content-details-item-val">{details.speed}</div>
+                  </div>
+                </>
+              )}
+              {details.ports && (
+                <>
+                  <div className="device-content-details-item">
+                    <div className="device-content-details-item-lbl">Ports</div>
+                    <div className="device-content-details-item-val">{details.ports}</div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
