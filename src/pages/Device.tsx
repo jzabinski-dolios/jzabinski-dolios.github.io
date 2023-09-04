@@ -35,10 +35,13 @@ const getPorts = (device: Device): string | null =>
   device.unifi?.network?.numberOfPorts?.toString() ?? null;
 
 export const DeviceInfo = (): ReactElement | null => {
+  // React functions
   const params = useParams<DeviceRouteParams>();
   const location = useLocation();
   const navigate = useNavigate();
   const [displayJSON, setDisplayJSON] = useState(false);
+
+  // Local setup
   const id = params.id;
   if (!id) {
     return null;
@@ -46,17 +49,23 @@ export const DeviceInfo = (): ReactElement | null => {
   const DEFAULT_RES = 259.556;
   const dvcIndex = deviceList.devices.findIndex((device) => device.id === id);
   if (dvcIndex === -1) {
+    // Should never happen, but if it does, display nothing. (No design for failure)
     return null;
   }
+  // Set up next page and previous.
+  // Behavior is undefined: go to the next or previous item in the overall list.
+  // Loop around if at the beginning/end of the list.
   const lastIndex = deviceList.devices.length - 1;
   const ahead = dvcIndex + 1;
   const behind = dvcIndex - 1;
   const next = ahead <= lastIndex ? ahead : 0;
   const prev = behind >= 0 ? behind : lastIndex;
   const device = deviceList.devices[dvcIndex];
+  // Set up image resolution, if possible.
   const resolution = device.icon?.resolutions
     ? findLeastResolution(device.icon.resolutions, DEFAULT_RES)
     : null;
+  // Set up overall display info.
   const details: ProductDetails = {
     image: {
       iconID: device.icon?.id ?? null,
@@ -70,6 +79,7 @@ export const DeviceInfo = (): ReactElement | null => {
     speed: getSpeed(device),
     ports: getPorts(device)
   };
+  // Finish up image resolution.
   const [width, height] = details.image.resolution ?? [null, null];
   const imgURL =
     width && height && details.image.iconID
@@ -77,6 +87,7 @@ export const DeviceInfo = (): ReactElement | null => {
       : '';
   const encodedURI = encodeURI(imgURL);
 
+  // Click handlers
   const onNextPrevClick = (nextPrev: 'next' | 'prev' = 'next'): undefined => {
     const nextNav =
       nextPrev === 'next' ? deviceList.devices[next].id! : deviceList.devices[prev].id!;
@@ -101,6 +112,7 @@ export const DeviceInfo = (): ReactElement | null => {
     return undefined;
   };
   const retrieveJSON = (): string => JSON.stringify(device, undefined, 2);
+  // Component itself
   return (
     <>
       <div className="device">
@@ -113,12 +125,12 @@ export const DeviceInfo = (): ReactElement | null => {
               </button>
             </div>
             <div className="device-subheader-right">
-              <div className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('prev')}>
+              <button className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('prev')}>
                 <div className="device-subheader-btn">{<BackIcon />}</div>
-              </div>
-              <div className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('next')}>
+              </button>
+              <button className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('next')}>
                 <div className="device-subheader-btn">{<ForwardIcon />}</div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
