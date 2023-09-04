@@ -103,7 +103,8 @@
             gap: 0.5rem;
             flex: 1 0 0;
           }
-          .device-content-details-item-text {
+          .device-content-details-item-val {
+            white-space: nowrap;
             color: var(--text-text-3-light, rgba(0, 0, 0, 0.45));
           }
         }

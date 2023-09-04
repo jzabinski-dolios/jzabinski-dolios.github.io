@@ -47,7 +47,7 @@ export const DeviceInfo = (): ReactElement | null => {
   const device = deviceList.devices[dvcIndex];
   const details: ProductDetails = {
     prodLine: device.line?.name ?? '',
-    id: device.id!,
+    id: device.line?.id ?? '',
     description: device.product?.name ?? '',
     shortNames: device.shortnames ?? [''],
     maxPower: getMaxPower(device),
