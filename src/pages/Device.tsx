@@ -4,6 +4,7 @@ import { DeviceRouteParams } from '../Routes';
 import { BackIcon } from '../icons/BackIcon';
 import { ForwardIcon } from '../icons/ForwardIcon';
 import { Device, deviceList } from '../uidb';
+import { findLeastResolution } from './findDeviceResolution';
 import './Device.scss';
 
 interface ProductDetails {
@@ -14,6 +15,10 @@ interface ProductDetails {
   maxPower: string | null;
   speed: string | null;
   ports: string | null;
+  image: {
+    iconID: string | null;
+    resolution: [number, number] | null;
+  };
 }
 
 const getMaxPower = (device: Device): string | null => {
@@ -37,6 +42,7 @@ export const DeviceInfo = (): ReactElement | null => {
   if (!id) {
     return null;
   }
+  const DEFAULT_RES = 259.556;
   const dvcIndex = deviceList.devices.findIndex((device) => device.id === id);
   if (dvcIndex === -1) {
     return null;
@@ -47,7 +53,14 @@ export const DeviceInfo = (): ReactElement | null => {
   const next = ahead <= lastIndex ? ahead : 0;
   const prev = behind >= 0 ? behind : lastIndex;
   const device = deviceList.devices[dvcIndex];
+  const resolution = device.icon?.resolutions
+    ? findLeastResolution(device.icon.resolutions, DEFAULT_RES)
+    : null;
   const details: ProductDetails = {
+    image: {
+      iconID: device.icon?.id ?? null,
+      resolution
+    },
     prodLine: device.line?.name ?? '',
     id: device.line?.id ?? '',
     description: device.product?.name ?? '',
@@ -75,6 +88,12 @@ export const DeviceInfo = (): ReactElement | null => {
     }
     return undefined;
   };
+  const [width, height] = details.image.resolution ?? [null, null];
+  const imgURL =
+    width && height && details.image.iconID
+      ? `https://static.ui.com/fingerprint/ui/icons/${details.image.iconID}_${width}x${height}.png`
+      : '';
+  const encodedURI = encodeURI(imgURL);
   return (
     <>
       <div className="device">
@@ -99,7 +118,12 @@ export const DeviceInfo = (): ReactElement | null => {
         <div className="device-content">
           <div className="device-content-fingerprint">
             <div className="device-content-img-ctr">
-              <div className="device-content-img"></div>
+              <div
+                className="device-content-img"
+                style={{
+                  background: `url(${encodedURI}), 50% / cover no-repeat`
+                }}
+              ></div>
             </div>
           </div>
           <div className="device-content-details">
