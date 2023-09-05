@@ -4,7 +4,12 @@ import { Header } from './sections/Header';
 import { Splash } from './pages/Splash';
 import { LocalStorageVars } from './localStorage';
 
+/**
+ * the root parent view. Manages the splash screen.
+ * @returns a ReactElement
+ */
 function App(): ReactElement {
+  // React
   const location = useLocation();
   // The splash screen is currently shown for one second when the page is entered for the first time.
   // Manage splash screen.
@@ -29,6 +34,7 @@ function App(): ReactElement {
       addEventListener('beforeunload', () => localStorage.removeItem(LocalStorageVars.SplashShown)),
     []
   );
+  // Template
   return (
     <>
       {showSplash ? (
