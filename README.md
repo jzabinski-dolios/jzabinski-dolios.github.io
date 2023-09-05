@@ -114,4 +114,8 @@ There are a few techniques that I wanted to showcase but didn't have time to dev
 Normally I use Puppeteer to develop app behaviors as I go along. I didn't have time to develop this way. I wanted to develop tests for each behavior for multiple browsers: ideally at least Chrome and Firefox. Safari would have been done had I gotten my hands on a Macbook.
 <li>Unit testing</li>
 You can go overboard with unit testing when developing web apps, but sometimes it is important for more complex functions. `findDeviceResolution.ts` would have benefited from some behavior codification defined through tests. I would have used Jest for this.
+<li>Progressive Render</li>
+The list and grid recover many more items than are displayed at any given time. I would have liked to have worked on a performant, progressive render for the views.
+<li>List view column sorting</li>
+The Figma file describes changes in the UI when the columns are clicked. The intended behavior may have been to sort the columns when they are clicked.
 </ol>

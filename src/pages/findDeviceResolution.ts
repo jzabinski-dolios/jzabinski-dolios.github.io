@@ -12,7 +12,7 @@ export const findLeastResolution = (
 ): [number, number] => {
   // Spec says that the images 'should' all be square; remove any that are not, just in case.
   const squareRes = resolutions.filter(([width, height]) => width === height);
-  // Sort by distance from the ideal. For example, if 10px is desired, then 11 will be sorted above than 12.
+  // Sort by distance from the ideal. For example, if 10px is desired, then 11 will be sorted above 12.
   const sortedByDistance = squareRes.sort(([widthA], [widthB]): number => {
     const distanceA = Math.abs(desiredResolution - widthA);
     const distanceB = Math.abs(desiredResolution - widthB);
