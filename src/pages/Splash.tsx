@@ -5,6 +5,12 @@ import './Splash.scss';
 export const Splash = (): ReactElement => (
   <div className="Splash">
     <UbiquitiIcon id="icon" />
-    <p id="motto">Ubiquiti FE Test Assignment</p>
+    {/* <p id="motto">Ubiquiti FE Test Assignment</p> */}
+    <div id="motto">
+      <span id="animate-first">Ubiquiti</span>
+      <span id="animate-second">FE</span>
+      <span id="animate-third">Test</span>
+      <span id="animate-fourth">Assignment</span>
+    </div>
   </div>
 );
