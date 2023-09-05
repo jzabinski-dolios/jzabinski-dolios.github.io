@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouteObject, createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 import { Devices } from './pages/devices/Devices';
 import { DeviceInfo } from './pages/Device';
 import App from './App';
@@ -45,6 +45,12 @@ const rts: Array<RouteObject> = [
         loader: () => loader,
         /* eslint-enable @typescript-eslint/naming-convention */
         element: <DeviceInfo />
+      },
+      {
+        path: '/',
+        /* eslint-disable @typescript-eslint/naming-convention */
+        loader: () => redirect('devices/list')
+        /* eslint-enable @typescript-eslint/naming-convention */
       }
     ]
   }

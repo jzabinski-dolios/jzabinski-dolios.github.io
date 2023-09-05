@@ -1,3 +1,8 @@
+@keyframes appear { // Disappearing is handled by the parent element. Be sure to keep this in sync with the disappeaing animation.
+to {
+  opacity: 1;
+}
+}
 .devices-search-results {
   display: flex;
   position: fixed;
@@ -11,7 +16,8 @@
 
   /* Shadows / high */
   box-shadow: 0px 16px 32px 0px rgba(28, 30, 45, 0.2);
-
+  opacity: 0;
+  animation: appear 0.8s ease-in-out forwards;
   .devices-search-result {
     display: flex;
     width: 20.5rem;
