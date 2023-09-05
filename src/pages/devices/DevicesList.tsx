@@ -1,13 +1,15 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import { deviceList } from '../../uidb';
 import './DevicesList.scss';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { DevicesSearchParams } from '../../Routes';
 import { ProductTblData } from './devicesUtilities';
 import { findLeastResolution } from '../findDeviceResolution';
+import { DataLoader } from '../../dataLoader';
 
 export const DevicesList = (): ReactElement => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const loader = useLoaderData() as DataLoader;
+  const deviceList = loader.deviceList!;
   const DEFAULT_RES = 21.67;
   const rawFilters = searchParams.get('filters');
   const filters = rawFilters?.split(',') ?? [];
