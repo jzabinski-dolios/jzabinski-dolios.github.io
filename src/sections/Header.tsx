@@ -2,6 +2,10 @@ import { ReactElement } from 'react';
 import { UbiIcon } from '../icons/UbiIcon';
 import './Header.scss';
 
+/**
+ * the header used by all views
+ * @returns a ReactElement
+ */
 export const Header = (): ReactElement => (
   <>
     <div className="header">
