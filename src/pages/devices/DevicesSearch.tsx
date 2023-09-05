@@ -18,10 +18,10 @@ export const DevicesSearch = (): ReactElement => {
           // Otherwise, child button clicks for results will not be processed before they are removed during the blur.
           if (!e.currentTarget.contains(e.relatedTarget)) {
             await new Promise<void>((resolve) => {
-              // Animate away any search results. (Results stay in the DOM for a second longer: see below.)
+              // Animate away the filter. (The filter stays in the DOM for a second longer: see below.)
               srchRes.current?.animate(fadeAway, effectTiming);
               setTimeout(() => {
-                // Use blurred to tell React to remove results from the DOM
+                // Use blurred to tell React to remove filter from the DOM
                 setBlurred(true);
                 resolve();
               }, 1000);

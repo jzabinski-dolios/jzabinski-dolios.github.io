@@ -13,6 +13,8 @@ Unclear if '123 Devices' is current count of table, or total devices. Went with 
 
 Images call for 'lightgray' background color, but that is not reflected in Figma. So, removed it.
 
+Animations
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
