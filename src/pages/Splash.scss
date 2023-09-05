@@ -8,6 +8,11 @@
   text-align: center;
   background: var(--primary-web-unifi-color-ublue-06, #006fff);
 
+  @keyframes expand {
+    to {
+      transform: scale(1.5);
+    }
+  }
   #icon {
     display: flex;
     padding: 9.6875rem 9.6875rem 9.53663rem 9.6875rem;
@@ -17,16 +22,7 @@
     height: 19.52588rem;
     flex-shrink: 0;
     fill: var(--neutral-web-unifi-color-neutral-00, #fff);
-  }
-
-  @keyframes ascend {
-    from {
-      transform: translateY(150%);
-    }
-
-    to {
-      transform: translateY(0%);
-    }
+    animation: expand 0.55s ease-in-out 0.25s forwards;
   }
 
   #motto {
@@ -40,8 +36,15 @@
     font-weight: 700;
     line-height: normal;
     white-space: nowrap;
-    >* {
+    > * {
+      // Beginning position of all child elements is 150% below normal
+      // Animation will end at normal position (translateY(0%))
       transform: translateY(150%);
+    }
+    @keyframes ascend {
+      to {
+        transform: translateY(0%);
+      }
     }
     #animate-first {
       animation: ascend 0.55s ease-in-out forwards;
