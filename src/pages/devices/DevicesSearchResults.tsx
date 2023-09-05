@@ -1,11 +1,11 @@
 import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
-import { ReactElement } from 'react';
+import { ReactElement, forwardRef } from 'react';
 import './DevicesSearchResults.scss';
 import { DataLoader } from '../../dataLoader';
 
 type DeviceList = Array<{ id: string; abbrev: string; name: string; srch: string }>;
 
-export const DevicesSearchResults = (): ReactElement => {
+export const DevicesSearchResults = forwardRef<HTMLDivElement>((unused, ref): ReactElement => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const loader = useLoaderData() as DataLoader;
@@ -47,7 +47,7 @@ export const DevicesSearchResults = (): ReactElement => {
     <>
       {searchParams.get('search') && searchParams.get('search') !== '' && (
         <>
-          <div className="devices-search-results">
+          <div className="devices-search-results" ref={ref}>
             {getProducts().map((device) => {
               const nm = device.name.toLocaleLowerCase();
               const beginHlt = nm.indexOf(device.srch);
@@ -75,4 +75,4 @@ export const DevicesSearchResults = (): ReactElement => {
       )}
     </>
   );
-};
+});
