@@ -1,7 +1,8 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useRef, useState } from 'react';
 import './DevicesFilter.scss';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import { DataLoader } from '../../dataLoader';
+import { effectTiming, fadeAway } from './devicesUtilities';
 
 export const DevicesFilter = (): ReactElement => {
   const loader = useLoaderData() as DataLoader;
@@ -15,6 +16,7 @@ export const DevicesFilter = (): ReactElement => {
   const [blurred, setBlurred] = useState(true);
   const [activeResetBtn, setActiveResetBtn] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const filterOptions = useRef<HTMLDivElement>(null);
   const updateFilters = (line: string, e: React.ChangeEvent<HTMLInputElement>): void => {
     const action = (e.target as any).checked ? 'add' : 'remove';
     const rawFilters = searchParams.get('filters');
@@ -57,11 +59,19 @@ export const DevicesFilter = (): ReactElement => {
       <div className="device-search-filter-ctr">
         <button
           className="devices-search-filter"
-          onBlur={(e: React.FocusEvent<HTMLButtonElement, Element>) => {
+          onBlur={async (e: React.FocusEvent<HTMLButtonElement, Element>) => {
             // If the click was on something other than this element or its children, react to blur event.
             // Otherwise, child button clicks for results will not be processed before they are removed during the blur.
             if (!e.currentTarget.contains(e.relatedTarget)) {
-              setBlurred(true);
+              await new Promise<void>((resolve) => {
+                // Animate away any search results. (Results stay in the DOM for a second longer: see below.)
+                filterOptions.current?.animate(fadeAway, effectTiming);
+                setTimeout(() => {
+                  // Use blurred to tell React to remove results from the DOM
+                  setBlurred(true);
+                  resolve();
+                }, 1000);
+              });
             }
           }}
           onFocus={() => {
@@ -73,7 +83,7 @@ export const DevicesFilter = (): ReactElement => {
             // Choices need to be mounted as children of the button so that blurring works well.
             // position:fixed helps the choices to display outside the button.
             <>
-              <div className="devices-search-filter-options">
+              <div className="devices-search-filter-options" ref={filterOptions}>
                 <div className="devices-search-filter-options-title">Product line</div>
                 {lines.length > 0 && (
                   <>
