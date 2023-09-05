@@ -41,6 +41,9 @@ const rts: Array<RouteObject> = [
       },
       {
         path: `device/:${DeviceRouteParams.id}`,
+        /* eslint-disable @typescript-eslint/naming-convention */
+        loader: () => loader,
+        /* eslint-enable @typescript-eslint/naming-convention */
         element: <DeviceInfo />
       }
     ]
