@@ -1,13 +1,15 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
 import { ReactElement } from 'react';
-import { deviceList } from '../../uidb';
 import './DevicesSearchResults.scss';
+import { DataLoader } from '../../dataLoader';
 
 type DeviceList = Array<{ id: string; abbrev: string; name: string; srch: string }>;
 
 export const DevicesSearchResults = (): ReactElement => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const loader = useLoaderData() as DataLoader;
+  const deviceList = loader.deviceList!;
   const clickHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     id: string
