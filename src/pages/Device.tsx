@@ -22,29 +22,48 @@ interface ProductDetails {
   };
 }
 
+/**
+ * Retrieves the setting for max power if defined on a device.
+ * @param device the Device in question
+ * @returns the desired power setting if available. Otherwise null.
+ */
 const getMaxPower = (device: Device): string | null => {
   const radios = device.unifi?.network?.radios;
-  // Lots of max powers are available, depending on the radio. Display the first one?
+  // Todo: Lots of max powers are available, depending on the radio. We have no design for which radio is desired.
+  // For now, just display the first one. If we get more design, this can be revised.
   const [, firstRadVal] = radios ? Object.entries(radios)[0] : [null, null];
   return firstRadVal?.maxPower?.toString() ?? null;
 };
 
+/**
+ * Retrieves the speed if defined on a device.
+ * @param device the Device in question
+ * @returns the speed if available. Otherwise null.
+ */
 const getSpeed = (device: Device): string | null =>
   device.unifi?.network?.ethernetMaxSpeedMegabitsPerSecond?.toString() ?? null;
 
+/**
+ * Retrieves the number of ports if defined on a device.
+ * @param device the Device in question
+ * @returns the number of ports if available, as a string. Otherwise null.
+ */
 const getPorts = (device: Device): string | null =>
   device.unifi?.network?.numberOfPorts?.toString() ?? null;
 
+/**
+ * A view for an individual item.
+ * @returns a ReactElement if information retrieval was possible. Otherwise null. (To accommodate changes to location of the 'id' field.)
+ */
 export const DeviceInfo = (): ReactElement | null => {
-  // React functions
+  // React
   const params = useParams<DeviceRouteParams>();
   const location = useLocation();
   const navigate = useNavigate();
   const [displayJSON, setDisplayJSON] = useState(false);
   const loader = useLoaderData() as DataLoader;
+  // Local variables
   const deviceList = loader.deviceList!;
-
-  // Local setup
   const id = params.id;
   if (!id) {
     return null;
@@ -56,7 +75,7 @@ export const DeviceInfo = (): ReactElement | null => {
     return null;
   }
   // Set up next page and previous.
-  // Behavior is undefined: go to the next or previous item in the overall list.
+  // Go to the next or previous item in the overall list. (Figma did not define this behavior.)
   // Loop around if at the beginning/end of the list.
   const lastIndex = deviceList.devices.length - 1;
   const ahead = dvcIndex + 1;
@@ -64,7 +83,6 @@ export const DeviceInfo = (): ReactElement | null => {
   const next = ahead <= lastIndex ? ahead : 0;
   const prev = behind >= 0 ? behind : lastIndex;
   const device = deviceList.devices[dvcIndex];
-  // Set up image resolution, if possible.
   const resolution = device.icon?.resolutions
     ? findLeastResolution(device.icon.resolutions, DEFAULT_RES)
     : null;
@@ -89,8 +107,7 @@ export const DeviceInfo = (): ReactElement | null => {
       ? `https://static.ui.com/fingerprint/ui/icons/${details.image.iconID}_${width}x${height}.png`
       : '';
   const encodedURI = encodeURI(imgURL);
-
-  // Click handlers
+  // Local functions
   const onNextPrevClick = (nextPrev: 'next' | 'prev' = 'next'): undefined => {
     const nextNav =
       nextPrev === 'next' ? deviceList.devices[next].id! : deviceList.devices[prev].id!;
@@ -115,7 +132,7 @@ export const DeviceInfo = (): ReactElement | null => {
     return undefined;
   };
   const retrieveJSON = (): string => JSON.stringify(device, undefined, 2);
-  // Component itself
+  // Template
   return (
     <>
       <div className="device">

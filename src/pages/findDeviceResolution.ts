@@ -1,10 +1,18 @@
+/**
+ * Finds an ideal resolution for display, given a resolution desired.
+ * @param resolutions a tuple of available resolutions, in [width,height] order.
+ * @param desiredResolution the desired resolution
+ * @returns The exact resolution requested if available. If only larger resolutions are available,
+ * the smallest of that larger set is returned. If only smaller resolutions are available, the largest
+ * of that smaller set is returned.
+ */
 export const findLeastResolution = (
   resolutions: Array<[number, number]>,
   desiredResolution: number
 ): [number, number] => {
   // Spec says that the images 'should' all be square; remove any that are not, just in case.
   const squareRes = resolutions.filter(([width, height]) => width === height);
-  // Sort by width, in case they are not yet sorted.
+  // Sort by distance from the ideal. For example, if 10px is desired, then 11 will be sorted above than 12.
   const sortedByDistance = squareRes.sort(([widthA], [widthB]): number => {
     const distanceA = Math.abs(desiredResolution - widthA);
     const distanceB = Math.abs(desiredResolution - widthB);
@@ -19,15 +27,13 @@ export const findLeastResolution = (
     // leave them in order if they are the same
     return 0;
   });
-  // The desired resolution is the smallest possible (for efficient bandwidth),
-  // which is either slightly bigger or equal to the requested resolution (for image quality).
-  // (Slightly bigger resolutions will be shrunk down well. Smaller resolutions will be potentially grainy.)
   const onlyEqualOrMore = sortedByDistance.filter(([width]) => width >= desiredResolution);
-  // Send the smallest resolution set if available. If nothing was equal to or bigger than the desired resolution,
-  // send the biggest one available. (For example, if we want 25 pixels and we have resolutions of 10 and 19 px, use 19.)
+  // If only bigger or equal resolutions are available, send the top resolution.
+  // This resolves equal resolutions, and bigger resolutions.
   if (onlyEqualOrMore.length > 0) {
     return onlyEqualOrMore[0];
   }
+  // If only smaller resolutions available, find the biggest possible.
   const sortedBiggestToSmallest = squareRes.sort(([widthA], [widthB]): number => {
     // sort a before b if a is bigger than b
     if (widthA > widthB) {
