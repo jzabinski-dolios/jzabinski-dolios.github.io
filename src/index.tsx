@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
 import { Router } from './Routes';
 import reportWebVitals from './reportWebVitals';
+import './index.scss';
 
+/**
+ * React's root element.
+ */
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
