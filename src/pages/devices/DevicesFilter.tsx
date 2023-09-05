@@ -1,9 +1,11 @@
 import { ReactElement, useState } from 'react';
-import { deviceList } from '../../uidb';
 import './DevicesFilter.scss';
-import { useSearchParams } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
+import { DataLoader } from '../../dataLoader';
 
 export const DevicesFilter = (): ReactElement => {
+  const loader = useLoaderData() as DataLoader;
+  const deviceList = loader.deviceList!;
   const lines = deviceList.devices.reduce<Array<string>>((uniqueLines, currDevice) => {
     if (currDevice.line?.name && !uniqueLines.includes(currDevice.line.name)) {
       uniqueLines.push(currDevice.line.name);

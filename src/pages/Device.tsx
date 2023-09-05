@@ -1,11 +1,12 @@
 import { ReactElement, useState } from 'react';
-import { Location, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Location, useLoaderData, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DeviceRouteParams } from '../Routes';
 import { BackIcon } from '../icons/BackIcon';
 import { ForwardIcon } from '../icons/ForwardIcon';
-import { Device, deviceList } from '../uidb';
+import { Device } from '../uidb';
 import { findLeastResolution } from './findDeviceResolution';
 import './Device.scss';
+import { DataLoader } from '../dataLoader';
 
 interface ProductDetails {
   prodLine: string;
@@ -40,6 +41,8 @@ export const DeviceInfo = (): ReactElement | null => {
   const location = useLocation();
   const navigate = useNavigate();
   const [displayJSON, setDisplayJSON] = useState(false);
+  const loader = useLoaderData() as DataLoader;
+  const deviceList = loader.deviceList!;
 
   // Local setup
   const id = params.id;
