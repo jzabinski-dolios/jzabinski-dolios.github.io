@@ -1,15 +1,24 @@
-import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
 import { ReactElement, forwardRef } from 'react';
+import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
 import './DevicesSearchResults.scss';
 import { DataLoader } from '../../dataLoader';
 
 type DeviceList = Array<{ id: string; abbrev: string; name: string; srch: string }>;
 
+/**
+ * A view of any search results.
+ * @description This element forwards a reference to one of its elements to the parent.
+ * This allows it to be animated away when removed from the DOM.
+ * @returns a ReactElement
+ */
 export const DevicesSearchResults = forwardRef<HTMLDivElement>((unused, ref): ReactElement => {
+  // React
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const loader = useLoaderData() as DataLoader;
+  // Local variables
   const deviceList = loader.deviceList!;
+  // Local functions
   const clickHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     id: string
@@ -43,6 +52,7 @@ export const DevicesSearchResults = forwardRef<HTMLDivElement>((unused, ref): Re
         };
       });
   };
+  // Template
   return (
     <>
       {searchParams.get('search') && searchParams.get('search') !== '' && (

@@ -1,16 +1,22 @@
 import { ReactElement } from 'react';
-import { ListBtn } from '../../btns/ListBtn';
-import './Devices.scss';
-import { DevicesSearch } from './DevicesSearch';
-import { DevicesTblTotal } from './DevicesTblTotal';
-import { DevicesFilter } from './DevicesFilter';
 import { useParams } from 'react-router';
+import { ListBtn } from '../../btns/ListBtn';
 import { DevicesRouteParams } from '../../Routes';
 import { DevicesList } from './DevicesList';
 import { DevicesGrid } from './DevicesGrid';
+import { DevicesSearch } from './DevicesSearch';
+import { DevicesTblTotal } from './DevicesTblTotal';
+import { DevicesFilter } from './DevicesFilter';
+import './Devices.scss';
 
+/**
+ * The main view for multiple devices. (See Device.tsx for a view of an individual device.)
+ * @returns a ReactElement
+ */
 export const Devices = (): ReactElement => {
+  // React
   const params = useParams<DevicesRouteParams>();
+  // Template
   return (
     <>
       <div className="devices">

@@ -1,14 +1,20 @@
+import { ChangeEvent, ReactElement, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../../icons/search.svg';
-import { ChangeEvent, ReactElement, useRef, useState } from 'react';
 import { DevicesSearchResults } from './DevicesSearchResults';
-import './DevicesSearch.scss';
 import { effectTiming, fadeAway } from './devicesUtilities';
+import './DevicesSearch.scss';
 
+/**
+ * A view of a search input, and any search results found.
+ * @returns a ReactElement
+ */
 export const DevicesSearch = (): ReactElement => {
+  // React
   const [, setSearchParams] = useSearchParams();
   const [blurred, setBlurred] = useState(false);
   const srchRes = useRef<HTMLDivElement>(null);
+  // Template
   return (
     <>
       <div

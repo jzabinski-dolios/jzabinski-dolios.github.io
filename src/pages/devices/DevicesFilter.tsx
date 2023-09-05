@@ -1,22 +1,32 @@
 import { ReactElement, useRef, useState } from 'react';
-import './DevicesFilter.scss';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import { DataLoader } from '../../dataLoader';
 import { effectTiming, fadeAway } from './devicesUtilities';
+import './DevicesFilter.scss';
 
+/**
+ * A filter for the devices. Filters by product line.
+ * @returns a ReactElement
+ */
 export const DevicesFilter = (): ReactElement => {
+  // React
+  const [blurred, setBlurred] = useState(true);
   const loader = useLoaderData() as DataLoader;
+  const [activeResetBtn, setActiveResetBtn] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filterOptions = useRef<HTMLDivElement>(null);
+  // Local properties
   const deviceList = loader.deviceList!;
+  // Todo: This could be generated once, in the data loader, and provided to this element multiple times,
+  // rather than generating it on every render.
   const lines = deviceList.devices.reduce<Array<string>>((uniqueLines, currDevice) => {
+    // If the current device has a line and we haven't added it to our list yet, then include it.
     if (currDevice.line?.name && !uniqueLines.includes(currDevice.line.name)) {
       uniqueLines.push(currDevice.line.name);
     }
     return uniqueLines;
   }, []);
-  const [blurred, setBlurred] = useState(true);
-  const [activeResetBtn, setActiveResetBtn] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const filterOptions = useRef<HTMLDivElement>(null);
+  // Local functions
   const updateFilters = (line: string, e: React.ChangeEvent<HTMLInputElement>): void => {
     const action = (e.target as any).checked ? 'add' : 'remove';
     const rawFilters = searchParams.get('filters');
@@ -54,6 +64,7 @@ export const DevicesFilter = (): ReactElement => {
     setSearchParams(searchParams);
     return undefined;
   };
+  // Template
   return (
     <>
       <div className="device-search-filter-ctr">

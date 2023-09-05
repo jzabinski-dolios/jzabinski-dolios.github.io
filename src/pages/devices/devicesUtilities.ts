@@ -8,7 +8,7 @@ export interface ProductTblData {
   };
 }
 
-// Animations
+// Animation settings used elsewhere in Element.animate
 export const fadeAway = [{ opacity: 1 }, { opacity: 0 }];
 export const effectTiming: EffectTiming = {
   duration: 800,

@@ -24,6 +24,7 @@ export const ListBtn = (props: ListBtnProps): ReactElement => {
     navigate(props.navTo);
     return undefined;
   };
+  // Template
   return (
     <>
       <button className="list-btn" onClick={clickHandler}>
