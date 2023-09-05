@@ -3,6 +3,7 @@ import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-d
 import { Devices } from './pages/devices/Devices';
 import { DeviceInfo } from './pages/Device';
 import App from './App';
+import loader from './dataLoader';
 
 export enum DevicesRouteParams {
   method = 'method'
@@ -33,6 +34,9 @@ const rts: Array<RouteObject> = [
     children: [
       {
         path: `devices/:${DevicesRouteParams.method}`,
+        /* eslint-disable @typescript-eslint/naming-convention */
+        loader: () => loader,
+        /* eslint-enable @typescript-eslint/naming-convention */
         element: <Devices />
       },
       {

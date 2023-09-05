@@ -1,4 +1,4 @@
-interface Devices {
+export interface Devices {
   version: string;
   devices: Array<Device>;
 }

@@ -1,17 +1,19 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import { deviceList } from '../../uidb';
 import './DevicesGrid.scss';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { DevicesSearchParams } from '../../Routes';
 import { ProductTblData } from './devicesUtilities';
 import { findLeastResolution } from '../findDeviceResolution';
+import { DataLoader } from '../../dataLoader';
 
-interface ProductTblGridData extends ProductTblData {
+export interface ProductTblGridData extends ProductTblData {
   shortnames: Array<string>;
 }
 
 export const DevicesGrid = (): ReactElement => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const loader = useLoaderData() as DataLoader;
+  const deviceList = loader.deviceList!;
   const DEFAULT_RES = 84;
   const rawFilters = searchParams.get('filters');
   const filters = rawFilters?.split(',') ?? [];

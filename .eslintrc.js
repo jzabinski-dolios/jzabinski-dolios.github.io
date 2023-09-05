@@ -84,6 +84,19 @@ module.exports = {
           regex: '^(?:(?:[0-9]{4})|(.*[A-Z].*)|(.*[a-z].*)|φ|ο)',
           match: true
         }
+      },
+      {
+        selector: 'classProperty',
+        format: ['camelCase', 'UPPER_CASE'],
+        leadingUnderscore: 'allow'
+      },
+      {
+        selector: 'classMethod',
+        format: ['camelCase', 'UPPER_CASE']
+      },
+      {
+        selector: 'accessor',
+        format: ['camelCase', 'UPPER_CASE']
       }
     ],
     '@typescript-eslint/camelcase': 'off', // doc claims that this is deprecated, but it apparently still needs to be explicitly off
@@ -167,6 +180,6 @@ module.exports = {
     'prefer-const': 'warn',
     radix: 'off',
     'semi-style': 'warn',
-    'spaced-comment': ['warn', 'always', { exceptions: ['\n'], markers: ['*', '/'] }],
+    'spaced-comment': ['warn', 'always', { exceptions: ['\n'], markers: ['*', '/'] }]
   }
 };
