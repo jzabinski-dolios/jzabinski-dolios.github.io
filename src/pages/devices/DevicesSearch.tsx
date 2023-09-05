@@ -19,19 +19,12 @@ export const DevicesSearch = (): ReactElement => {
     <>
       <div
         className="devices-search"
-        onBlur={async (e: React.FocusEvent<HTMLDivElement, Element>) => {
+        onBlur={(e: React.FocusEvent<HTMLDivElement, Element>) => {
           // If the click was on something other than this element or its children, react to blur event.
           // Otherwise, child button clicks for results will not be processed before they are removed during the blur.
           if (!e.currentTarget.contains(e.relatedTarget)) {
-            await new Promise<void>((resolve) => {
-              // Animate away the filter. (The filter stays in the DOM for a second longer: see below.)
-              srchRes.current?.animate(fadeAway, effectTiming);
-              setTimeout(() => {
-                // Use blurred to tell React to remove filter from the DOM
-                setBlurred(true);
-                resolve();
-              }, 1000);
-            });
+            const animation = srchRes.current?.animate(fadeAway, effectTiming);
+            animation?.addEventListener('animationend', () => setBlurred(true));
           }
         }}
         onFocus={() => setBlurred(false)}
