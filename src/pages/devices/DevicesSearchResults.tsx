@@ -1,5 +1,5 @@
 import { ReactElement, forwardRef } from 'react';
-import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import './DevicesSearchResults.scss';
 import { DataLoader } from '../../dataLoader';
 
@@ -14,6 +14,7 @@ type DeviceList = Array<{ id: string; abbrev: string; name: string; srch: string
 export const DevicesSearchResults = forwardRef<HTMLDivElement>((unused, ref): ReactElement => {
   // React
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const loader = useLoaderData() as DataLoader;
   // Local variables
@@ -24,7 +25,7 @@ export const DevicesSearchResults = forwardRef<HTMLDivElement>((unused, ref): Re
     id: string
   ): undefined => {
     e.preventDefault();
-    navigate(`../device/${id}`);
+    navigate(`../device/${id}`, { state: { from: location } });
     return undefined;
   };
   const getProducts = (): DeviceList => {
