@@ -174,30 +174,30 @@ export const DeviceInfo = (): ReactElement | null => {
             </div>
           </div>
         </header>
-        <section className="device-content">
+        <section className="h-product device-content">
           <div className="device-content-fingerprint">
             <div className="device-content-img-ctr">
               <div
-                className="device-content-img"
+                className="u-photo device-content-img"
                 style={{
                   background: `url(${encodedURI}), 50% / cover no-repeat`
                 }}
               ></div>
             </div>
           </div>
-          <div className="device-content-details">
+          <div className="h-product device-content-details">
             <div className="device-content-details-title">
-              <div className="heading-xlarge-1">{details.description}</div>
+              <div className="p-name heading-xlarge-1">{details.description}</div>
               <div className="device-content-details-title-model-name">{details.prodLine}</div>
             </div>
             <div className="device-content-details-list">
               <div className="device-content-details-item">
                 <div className="device-content-details-item-lbl">Product Line</div>
-                <div className="device-content-details-item-val">{details.prodLine}</div>
+                <div className="p-category device-content-details-item-val">{details.prodLine}</div>
               </div>
               <div className="device-content-details-item">
                 <div className="device-content-details-item-lbl">ID</div>
-                <div className="device-content-details-item-val">{details.id}</div>
+                <div className="u-identifier device-content-details-item-val">{details.id}</div>
               </div>
               <div className="device-content-details-item">
                 <div className="device-content-details-item-lbl">Name</div>
