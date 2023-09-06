@@ -19,12 +19,12 @@ export const DevicesSearch = (): ReactElement => {
     <>
       <div
         className="devices-search"
-        onBlur={(e: React.FocusEvent<HTMLDivElement, Element>) => {
+        onBlur={async (e: React.FocusEvent<HTMLDivElement, Element>) => {
           // If the click was on something other than this element or its children, react to blur event.
           // Otherwise, child button clicks for results will not be processed before they are removed during the blur.
           if (!e.currentTarget.contains(e.relatedTarget)) {
-            const animation = srchRes.current?.animate(fadeAway, effectTiming);
-            animation?.addEventListener('animationend', () => setBlurred(true));
+            await srchRes.current?.animate(fadeAway, effectTiming).finished;
+            setBlurred(true);
           }
         }}
         onFocus={() => setBlurred(false)}

@@ -109,13 +109,13 @@ Animations of most elements are achieved through CSS. A `@keyframes` transition 
 }
 ```
 
-Exit animations, done as elements are removed, is a little trickier. The parent element holds a `ref` to the exiting element, and uses `Element.animate` to run an animation, waiting for the animation to end before declaring that components can react to the  event. This allows the animation to complete before removing the element. For example:
+Exit animations, done as elements are removed, is a little trickier. The parent element holds a `ref` to the exiting element, and uses `Element.animate` to run an animation, waiting for the animation to end before declaring that components can react to the event. This allows the animation to complete before removing the element. For example:
 ```
 const [blurred, setBlurred] = useState(true);
 const filterOptions = useRef<HTMLDivElement>(null);
 ...
-const animation = filterOptions.current?.animate(fadeAway, effectTiming);
-animation?.addEventListener('animationend', () => setBlurred(true));
+await filterOptions.current?.animate(fadeAway, effectTiming).finished;
+setBlurred(true);
 ```
 And in the template:
 ```
