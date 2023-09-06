@@ -143,7 +143,7 @@ export const DeviceInfo = (): ReactElement | null => {
   // Template
   return (
     <>
-      <div className="device">
+      <main className="device">
         <div className="device-subheader-ctr">
           <div className="device-subheader">
             <div className="device-subheader-left">
@@ -240,7 +240,7 @@ export const DeviceInfo = (): ReactElement | null => {
           <div className="device-cta-text">See All Details as JSON</div>
         </button>
         {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
-      </div>
+      </main>
     </>
   );
 };

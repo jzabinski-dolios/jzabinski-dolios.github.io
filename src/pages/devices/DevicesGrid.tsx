@@ -79,7 +79,7 @@ export const DevicesGrid = (): ReactElement => {
   // Template
   return (
     <>
-      <div className="devices-grid" ref={ctrRef} style={{ height: ctrHeight }}>
+      <main className="devices-grid" ref={ctrRef} style={{ height: ctrHeight }}>
         {products.map((product, index: number) => {
           const key = `devices-grid-item-${index}`;
           const id = product.image.iconID;
@@ -133,7 +133,7 @@ export const DevicesGrid = (): ReactElement => {
             </button>
           );
         })}
-      </div>
+      </main>
     </>
   );
 };
