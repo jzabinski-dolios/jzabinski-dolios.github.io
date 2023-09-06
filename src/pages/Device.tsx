@@ -209,7 +209,7 @@ export const DeviceInfo = (): ReactElement | null => {
                 <>
                   <div className="device-content-details-item">
                     <div className="device-content-details-item-lbl">Speed</div>
-                    <div className="device-content-details-item-val">{details.speed}</div>
+                    <div className="device-content-details-item-val">{`${details.speed} Mbps`}</div>
                   </div>
                 </>
               )}
