@@ -27,7 +27,7 @@ export const ListBtn = (props: ListBtnProps): ReactElement => {
   // Template
   return (
     <>
-      <button className="list-btn" onClick={clickHandler}>
+      <button className="list-btn" onClick={clickHandler} aria-label="list">
         {props.btn === 'table' ? <ListIcon /> : <GridIcon />}
       </button>
     </>

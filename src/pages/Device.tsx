@@ -147,16 +147,28 @@ export const DeviceInfo = (): ReactElement | null => {
         <div className="device-subheader-ctr">
           <div className="device-subheader">
             <div className="device-subheader-left">
-              <button className="device-subheader-btn-ctr" onClick={() => onBackClick()}>
+              <button
+                className="device-subheader-btn-ctr"
+                onClick={() => onBackClick()}
+                aria-label="back"
+              >
                 <div className="device-subheader-btn">{<BackIcon />}</div>
                 <div className="device-subheader-back-btn-text">Back</div>
               </button>
             </div>
             <div className="device-subheader-right">
-              <button className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('prev')}>
+              <button
+                className="device-subheader-btn-ctr"
+                onClick={() => onNextPrevClick('prev')}
+                aria-label="back-item"
+              >
                 <div className="device-subheader-btn">{<BackIcon />}</div>
               </button>
-              <button className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('next')}>
+              <button
+                className="device-subheader-btn-ctr"
+                onClick={() => onNextPrevClick('next')}
+                aria-label="forward-item"
+              >
                 <div className="device-subheader-btn">{<ForwardIcon />}</div>
               </button>
             </div>
@@ -224,7 +236,7 @@ export const DeviceInfo = (): ReactElement | null => {
             </div>
           </div>
         </div>
-        <button className="device-cta-ctr" onClick={() => onRetrieveClick()}>
+        <button className="device-cta-ctr" onClick={() => onRetrieveClick()} aria-label="details">
           <div className="device-cta-text">See All Details as JSON</div>
         </button>
         {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
