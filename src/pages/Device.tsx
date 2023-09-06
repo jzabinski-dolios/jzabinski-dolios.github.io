@@ -31,7 +31,15 @@ const getMaxPower = (device: Device): string | null => {
   const radios = device.unifi?.network?.radios;
   // Todo: Lots of max powers are available, depending on the radio. We have no design for which radio is desired.
   // For now, just display the first one. If we get more design, this can be revised.
-  const [, firstRadVal] = radios ? Object.entries(radios)[0] : [null, null];
+  // const [, firstRadVal] = radios ? Object.entries(radios)[0] : [null, null];
+  // For some reason, Chrome does not like the above line. The below is a kluge for Chrome.
+  let firstRadVal: {
+    [key: string]: any;
+    maxPower?: number;
+  } | null = null;
+  if (radios) {
+    firstRadVal = Object.entries(radios)[0];
+  }
   return firstRadVal?.maxPower?.toString() ?? null;
 };
 
