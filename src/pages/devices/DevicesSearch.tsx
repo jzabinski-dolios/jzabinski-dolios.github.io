@@ -36,6 +36,7 @@ export const DevicesSearch = (): ReactElement => {
             </div>
             <input
               className="devices-search-attribs-input lato-regular-14"
+              name="search"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 e.preventDefault();
                 setSearchParams({ search: e.target.value });
