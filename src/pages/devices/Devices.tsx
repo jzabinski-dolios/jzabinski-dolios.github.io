@@ -20,7 +20,7 @@ export const Devices = (): ReactElement => {
   return (
     <>
       <div className="devices">
-        <div className="devices-subheader">
+        <header className="devices-subheader">
           <div className="devices-subheader-left">
             <DevicesSearch />
             <DevicesTblTotal />
@@ -30,7 +30,7 @@ export const Devices = (): ReactElement => {
             <ListBtn btn="grid" navTo="../devices/grid" />
             <DevicesFilter />
           </div>
-        </div>
+        </header>
         {params.method === 'list' && <DevicesList />}
         {params.method === 'grid' && <DevicesGrid />}
       </div>
