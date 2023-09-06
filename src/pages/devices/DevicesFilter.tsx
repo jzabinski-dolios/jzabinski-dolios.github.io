@@ -98,7 +98,7 @@ export const DevicesFilter = (): ReactElement => {
                             type="checkbox"
                             checked={filterSet(line)}
                             value={line}
-                            name={line}
+                            id={line}
                             onChange={(e) => updateFilters(line, e)}
                           />
                           <label htmlFor={line}>{line}</label>
