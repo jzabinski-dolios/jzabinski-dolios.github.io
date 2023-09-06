@@ -70,83 +70,91 @@ export const DevicesList = (): ReactElement => {
   // Template
   return (
     <>
-      <div className="devices-list-table-header-ctr">
-        <div className="devices-list-table-header">
-          <div className="devices-list-table-header-icon"></div>
-          <div className="devices-list-table-header-col">
-            <div className="devices-list-table-header-text-ctr">
-              <div className="heading-medium">Product Line</div>
+      <main className="devices-list-main">
+        <div className="devices-list-table-header-ctr">
+          <div className="devices-list-table-header">
+            <div className="devices-list-table-header-icon"></div>
+            <div className="devices-list-table-header-col">
+              <div className="devices-list-table-header-text-ctr">
+                <div className="heading-medium">Product Line</div>
+              </div>
             </div>
-          </div>
-          <div className="devices-list-table-header-col">
-            <div className="devices-list-table-header-text-ctr">
-              <div className="heading-medium">Name</div>
+            <div className="devices-list-table-header-col">
+              <div className="devices-list-table-header-text-ctr">
+                <div className="heading-medium">Name</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="devices-list-table-ctr" ref={ctrRef} style={{ height: ctrHeight }}>
-        <div className="devices-list-table">
-          <div className="devices-list-table-images">
-            {products.map((product, index: number) => {
-              const key = `devices-list-table-images-ctr-${index}`;
-              const id = product.image.iconID;
-              const [width, height] = product.image.resolution ?? [null, null];
-              const imgURL =
-                width && height
-                  ? `https://static.ui.com/fingerprint/ui/icons/${id}_${width}x${height}.png`
-                  : 'https://noimage';
-              const encodedURI = encodeURI(imgURL);
-              return (
-                <div
-                  className="devices-list-table-images-ctr"
-                  key={key}
-                  onClick={() => onProductClick(product.id)}
-                >
-                  <div className="devices-list-table-images-thumbnail">
-                    <div className="devices-list-table-images-base">
-                      <div
-                        className="devices-list-table-images-image"
-                        style={{
-                          background: `url(${encodedURI}), 50% / cover no-repeat`
-                        }}
-                      ></div>
+        <div className="devices-list-table-ctr" ref={ctrRef} style={{ height: ctrHeight }}>
+          <div className="devices-list-table">
+            <div className="devices-list-table-images">
+              {products.map((product, index: number) => {
+                const key = `devices-list-table-images-ctr-${index}`;
+                const id = product.image.iconID;
+                const [width, height] = product.image.resolution ?? [null, null];
+                const imgURL =
+                  width && height
+                    ? `https://static.ui.com/fingerprint/ui/icons/${id}_${width}x${height}.png`
+                    : 'https://noimage';
+                const encodedURI = encodeURI(imgURL);
+                return (
+                  <button
+                    className="devices-list-table-images-ctr"
+                    key={key}
+                    onClick={() => onProductClick(product.id)}
+                    aria-labelledby={product.description}
+                  >
+                    <div className="devices-list-table-images-thumbnail">
+                      <div className="devices-list-table-images-base">
+                        <div
+                          className="devices-list-table-images-image"
+                          style={{
+                            background: `url(${encodedURI}), 50% / cover no-repeat`
+                          }}
+                        ></div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="devices-list-table-product-lines">
-            {products.map((product, index) => {
-              const key = `devices-list-table-product-line-${index}`;
-              return (
-                <div
-                  className="devices-list-table-product-line"
-                  key={key}
-                  onClick={() => onProductClick(product.id)}
-                >
-                  <div className="devices-list-table-product-line-text">{product.line}</div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="devices-list-table-product-names">
-            {products.map((product, index) => {
-              const key = `devices-list-table-product-name-${index}`;
-              return (
-                <div
-                  className="devices-list-table-product-name"
-                  key={key}
-                  onClick={() => onProductClick(product.id)}
-                >
-                  <div className="devices-list-table-product-name-text">{product.description}</div>
-                </div>
-              );
-            })}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="devices-list-table-product-lines">
+              {products.map((product, index) => {
+                const key = `devices-list-table-product-line-${index}`;
+                return (
+                  <button
+                    className="devices-list-table-product-line"
+                    key={key}
+                    onClick={() => onProductClick(product.id)}
+                    aria-labelledby={product.description}
+                  >
+                    <div className="devices-list-table-product-line-text">{product.line}</div>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="devices-list-table-product-names">
+              {products.map((product, index) => {
+                const key = `devices-list-table-product-name-${index}`;
+                return (
+                  <button
+                    className="devices-list-table-product-name"
+                    key={key}
+                    onClick={() => onProductClick(product.id)}
+                    aria-label={product.description}
+                    id={product.description}
+                  >
+                    <div className="devices-list-table-product-name-text">
+                      {product.description}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 };

@@ -143,49 +143,61 @@ export const DeviceInfo = (): ReactElement | null => {
   // Template
   return (
     <>
-      <div className="device">
-        <div className="device-subheader-ctr">
+      <main className="device">
+        <header className="device-subheader-ctr">
           <div className="device-subheader">
             <div className="device-subheader-left">
-              <button className="device-subheader-btn-ctr" onClick={() => onBackClick()}>
+              <button
+                className="device-subheader-btn-ctr"
+                onClick={() => onBackClick()}
+                aria-label="back"
+              >
                 <div className="device-subheader-btn">{<BackIcon />}</div>
                 <div className="device-subheader-back-btn-text">Back</div>
               </button>
             </div>
             <div className="device-subheader-right">
-              <button className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('prev')}>
+              <button
+                className="device-subheader-btn-ctr"
+                onClick={() => onNextPrevClick('prev')}
+                aria-label="back-item"
+              >
                 <div className="device-subheader-btn">{<BackIcon />}</div>
               </button>
-              <button className="device-subheader-btn-ctr" onClick={() => onNextPrevClick('next')}>
+              <button
+                className="device-subheader-btn-ctr"
+                onClick={() => onNextPrevClick('next')}
+                aria-label="forward-item"
+              >
                 <div className="device-subheader-btn">{<ForwardIcon />}</div>
               </button>
             </div>
           </div>
-        </div>
-        <div className="device-content">
+        </header>
+        <section className="h-product device-content">
           <div className="device-content-fingerprint">
             <div className="device-content-img-ctr">
               <div
-                className="device-content-img"
+                className="u-photo device-content-img"
                 style={{
                   background: `url(${encodedURI}), 50% / cover no-repeat`
                 }}
               ></div>
             </div>
           </div>
-          <div className="device-content-details">
+          <div className="h-product device-content-details">
             <div className="device-content-details-title">
-              <div className="heading-xlarge-1">{details.description}</div>
+              <div className="p-name heading-xlarge-1">{details.description}</div>
               <div className="device-content-details-title-model-name">{details.prodLine}</div>
             </div>
             <div className="device-content-details-list">
               <div className="device-content-details-item">
                 <div className="device-content-details-item-lbl">Product Line</div>
-                <div className="device-content-details-item-val">{details.prodLine}</div>
+                <div className="p-category device-content-details-item-val">{details.prodLine}</div>
               </div>
               <div className="device-content-details-item">
                 <div className="device-content-details-item-lbl">ID</div>
-                <div className="device-content-details-item-val">{details.id}</div>
+                <div className="u-identifier device-content-details-item-val">{details.id}</div>
               </div>
               <div className="device-content-details-item">
                 <div className="device-content-details-item-lbl">Name</div>
@@ -223,12 +235,14 @@ export const DeviceInfo = (): ReactElement | null => {
               )}
             </div>
           </div>
-        </div>
-        <button className="device-cta-ctr" onClick={() => onRetrieveClick()}>
-          <div className="device-cta-text">See All Details as JSON</div>
-        </button>
-        {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
-      </div>
+        </section>
+        <section className="device-json-section">
+          <button className="device-cta-ctr" onClick={() => onRetrieveClick()} aria-label="details">
+            <div className="device-cta-text">See All Details as JSON</div>
+          </button>
+          {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
+        </section>
+      </main>
     </>
   );
 };

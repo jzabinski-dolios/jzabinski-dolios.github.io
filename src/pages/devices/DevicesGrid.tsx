@@ -79,7 +79,7 @@ export const DevicesGrid = (): ReactElement => {
   // Template
   return (
     <>
-      <div className="devices-grid" ref={ctrRef} style={{ height: ctrHeight }}>
+      <main className="devices-grid" ref={ctrRef} style={{ height: ctrHeight }}>
         {products.map((product, index: number) => {
           const key = `devices-grid-item-${index}`;
           const id = product.image.iconID;
@@ -90,7 +90,12 @@ export const DevicesGrid = (): ReactElement => {
               : 'https://noimage';
           const encodedURI = encodeURI(imgURL);
           return (
-            <div className="devices-grid-item" key={key} onClick={() => onProductClick(product.id)}>
+            <button
+              className="devices-grid-item"
+              key={key}
+              onClick={() => onProductClick(product.id)}
+              aria-label={product.description}
+            >
               <div className="devices-grid-item-upper">
                 <div
                   className="devices-grid-item-upper-image"
@@ -125,10 +130,10 @@ export const DevicesGrid = (): ReactElement => {
                   })}
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
-      </div>
+      </main>
     </>
   );
 };

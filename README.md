@@ -43,6 +43,21 @@ Not so for grid view. The grid view describes the grid items in discrete rows of
 
 The Figma file calls for background images to have a 'lightgray' background color, but that is not reflected in the illustrations. I decided to follow the illustration examples, and omitted the light gray background.
 
+### Foreground/Background WCAG Issues
+Several colors in the Figma file failed accessibility checks and needed to be darkened in order to increase contrast. These colors included:
+```
+// --primary-web-unifi-color-ublue-06: #006fff;
+--primary-web-unifi-color-ublue-06: #004db3;
+// --text-web-unifi-text-3: #808893;
+--text-web-unifi-text-3: #4d545b;
+// --text-black-45: rgba(0, 0, 0, 0.45);
+// --text-text-3: rgba(0, 0, 0, 0.45);
+// --text-text-3-light: rgba(0, 0, 0, 0.45);
+--text-text-3: rgba(0, 0, 0, 0.75);
+--text-text-3-light: rgba(0, 0, 0, 0.75);
+--text-black-45: rgba(0, 0, 0, 0.75);
+``````
+
 ### Explicit Widths
 
 All views in the Figma file except the top view have an explicit width of 90rem. I assumed that that was for the purpose of illustrating each view, and not intended to be a hard limit to the width in the app itself.
@@ -94,13 +109,13 @@ Animations of most elements are achieved through CSS. A `@keyframes` transition 
 }
 ```
 
-Exit animations, done as elements are removed, is a little trickier. The parent element holds a `ref` to the exiting element, and uses `Element.animate` to run an animation, waiting for the animation to end before declaring that components can react to the  event. This allows the animation to complete before removing the element. For example:
+Exit animations, done as elements are removed, is a little trickier. The parent element holds a `ref` to the exiting element, and uses `Element.animate` to run an animation, waiting for the animation to end before declaring that components can react to the event. This allows the animation to complete before removing the element. For example:
 ```
 const [blurred, setBlurred] = useState(true);
 const filterOptions = useRef<HTMLDivElement>(null);
 ...
-const animation = filterOptions.current?.animate(fadeAway, effectTiming);
-animation?.addEventListener('animationend', () => setBlurred(true));
+await filterOptions.current?.animate(fadeAway, effectTiming).finished;
+setBlurred(true);
 ```
 And in the template:
 ```

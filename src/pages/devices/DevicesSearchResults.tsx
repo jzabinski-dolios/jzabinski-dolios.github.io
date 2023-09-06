@@ -71,6 +71,7 @@ export const DevicesSearchResults = forwardRef<HTMLDivElement>((unused, ref): Re
                   key={device.id}
                   className="devices-search-result"
                   onClick={(e) => clickHandler(e, device.id)}
+                  aria-label={nm}
                 >
                   <div>
                     <span>{pre}</span>

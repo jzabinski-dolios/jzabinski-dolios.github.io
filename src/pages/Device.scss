@@ -142,9 +142,15 @@
       font-family: UI Sans_v7;
     }
   }
-  .device-json {
+  .device-json-section {
     display: flex;
-    padding: 0 10rem 0 10rem;
-    background: var(--neutral-web-unifi-color-neutral-02, #f4f5f6);
+    flex-direction: column;
+    justify-content: center;
+    .device-json {
+      display: flex;
+      padding: 0 10rem 0 10rem;
+      background: var(--neutral-web-unifi-color-neutral-02, #f4f5f6);
+    }
   }
+  
 }
