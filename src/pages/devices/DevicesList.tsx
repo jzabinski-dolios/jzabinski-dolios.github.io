@@ -98,10 +98,11 @@ export const DevicesList = (): ReactElement => {
                   : 'https://noimage';
               const encodedURI = encodeURI(imgURL);
               return (
-                <div
+                <button
                   className="devices-list-table-images-ctr"
                   key={key}
                   onClick={() => onProductClick(product.id)}
+                  aria-labelledby={product.description}
                 >
                   <div className="devices-list-table-images-thumbnail">
                     <div className="devices-list-table-images-base">
@@ -113,7 +114,7 @@ export const DevicesList = (): ReactElement => {
                       ></div>
                     </div>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -121,13 +122,14 @@ export const DevicesList = (): ReactElement => {
             {products.map((product, index) => {
               const key = `devices-list-table-product-line-${index}`;
               return (
-                <div
+                <button
                   className="devices-list-table-product-line"
                   key={key}
                   onClick={() => onProductClick(product.id)}
+                  aria-labelledby={product.description}
                 >
                   <div className="devices-list-table-product-line-text">{product.line}</div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -135,13 +137,15 @@ export const DevicesList = (): ReactElement => {
             {products.map((product, index) => {
               const key = `devices-list-table-product-name-${index}`;
               return (
-                <div
+                <button
                   className="devices-list-table-product-name"
                   key={key}
                   onClick={() => onProductClick(product.id)}
+                  aria-label={product.description}
+                  id={product.description}
                 >
                   <div className="devices-list-table-product-name-text">{product.description}</div>
-                </div>
+                </button>
               );
             })}
           </div>
