@@ -70,7 +70,7 @@ export const DevicesList = (): ReactElement => {
   // Template
   return (
     <>
-      <main>
+      <main className="devices-list-main">
         <div className="devices-list-table-header-ctr">
           <div className="devices-list-table-header">
             <div className="devices-list-table-header-icon"></div>

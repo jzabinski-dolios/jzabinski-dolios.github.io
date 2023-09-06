@@ -144,7 +144,7 @@ export const DeviceInfo = (): ReactElement | null => {
   return (
     <>
       <main className="device">
-        <div className="device-subheader-ctr">
+        <header className="device-subheader-ctr">
           <div className="device-subheader">
             <div className="device-subheader-left">
               <button
@@ -173,8 +173,8 @@ export const DeviceInfo = (): ReactElement | null => {
               </button>
             </div>
           </div>
-        </div>
-        <div className="device-content">
+        </header>
+        <section className="device-content">
           <div className="device-content-fingerprint">
             <div className="device-content-img-ctr">
               <div
@@ -235,11 +235,13 @@ export const DeviceInfo = (): ReactElement | null => {
               )}
             </div>
           </div>
-        </div>
-        <button className="device-cta-ctr" onClick={() => onRetrieveClick()} aria-label="details">
-          <div className="device-cta-text">See All Details as JSON</div>
-        </button>
-        {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
+        </section>
+        <section className="device-json-section">
+          <button className="device-cta-ctr" onClick={() => onRetrieveClick()} aria-label="details">
+            <div className="device-cta-text">See All Details as JSON</div>
+          </button>
+          {displayJSON && <div className="device-json">{retrieveJSON()}</div>}
+        </section>
       </main>
     </>
   );
