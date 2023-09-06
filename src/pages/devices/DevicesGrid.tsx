@@ -90,7 +90,12 @@ export const DevicesGrid = (): ReactElement => {
               : 'https://noimage';
           const encodedURI = encodeURI(imgURL);
           return (
-            <div className="devices-grid-item" key={key} onClick={() => onProductClick(product.id)}>
+            <button
+              className="devices-grid-item"
+              key={key}
+              onClick={() => onProductClick(product.id)}
+              aria-label={product.description}
+            >
               <div className="devices-grid-item-upper">
                 <div
                   className="devices-grid-item-upper-image"
@@ -125,7 +130,7 @@ export const DevicesGrid = (): ReactElement => {
                   })}
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

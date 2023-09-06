@@ -16,6 +16,8 @@
   .devices-grid-item {
     display: flex;
     cursor: pointer;
+    border: none;
+    background: transparent;
     padding-bottom: 0px;
     flex-direction: column;
     align-items: flex-start;
